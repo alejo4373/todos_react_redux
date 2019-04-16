@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
-import { ADD_TODO } from '../store/actionTypes';
+import { ADD_TODO, DELETE_TODO } from '../store/actionTypes';
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
 
@@ -20,6 +20,11 @@ class TodosContainer extends Component {
       text: this.state.inputText,
       completed: false
     }
+
+    this.setState({
+      inputText: ''
+    })
+
     this.props.addTodo(todo)
   }
 
@@ -28,11 +33,18 @@ class TodosContainer extends Component {
       inputText: event.target.value
     })
   }
+
+  handleDeleteTodo = (event) => {
+    const todoId = event.target.id;
+    this.props.deleteTodo(todoId)
+  }
+
   render() {
     return (
       <div>
-        <TodoForm handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        <Todos todos={this.props.todos}/>
+        <h2>Todos App</h2>
+        <TodoForm inputText={this.inputText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        <Todos todos={this.props.todos} deleteTodo={this.handleDeleteTodo}/>
       </div>
     )
   }
@@ -46,7 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTodo: (todo) => dispatch({type: ADD_TODO, todo: todo})
+    addTodo: (todo) => dispatch({type: ADD_TODO, todo: todo}),
+    deleteTodo: (id) => dispatch({type: DELETE_TODO, todo: {id: id}}) 
   }
 }
 

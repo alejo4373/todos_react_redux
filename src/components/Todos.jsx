@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import TodoList from './TodoList';
 
 const Todos = (props) => {
+  const { todos, deleteTodo } = props;
     return (
-      <TodoList todos={props.todos} />
+      <div>
+        <hr/>
+        <TodoList todos={todos} deleteTodo={deleteTodo}/>
+      </div>
     )
 }
 

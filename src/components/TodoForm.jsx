@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 const TodoForm = (props) => {
-  const { handleChange, handleSubmit } = props
+  const { handleChange, handleSubmit, inputText} = props
     return (
       <form onSubmit={handleSubmit}>
-        <input onChange={handleChange}/>
+        <input onChange={handleChange} value={inputText} placeholder={'Type a todo'}/>
         <button>+</button>
       </form>
     )
