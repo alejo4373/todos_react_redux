@@ -8,11 +8,24 @@
 }
 
 form > input[type=text] {
-  width: 90%;
+  width: 89%;
+  height: 1.5em;
 }
 
 ul {
   list-style-type: none;
+  padding: 0;
+}
+
+ul > .todo-item {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  height: 2em;
+}
+
+button {
+  height: 2em;
+  width: 2em;
 }
 
 .todo-item > .completed {
@@ -20,8 +33,11 @@ ul {
 }
 
 .todo-item > .todo-content {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
+
 .todo-item > .btn_remove {
   display: none;
 }
