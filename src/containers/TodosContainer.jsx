@@ -19,7 +19,7 @@ class TodosContainer extends Component {
     
     const todo = {
       id: uuid(),
-      text: inputText,
+      text: inputText.trim(),
       completed: false
     }
 
