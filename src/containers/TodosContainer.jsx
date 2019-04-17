@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
-import { ADD_TODO, DELETE_TODO } from '../store/actionTypes';
+import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from '../store/actionTypes';
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
 
@@ -39,12 +39,18 @@ class TodosContainer extends Component {
     this.props.deleteTodo(todoId)
   }
 
+  handleToggleCompleted = (event) => {
+    const todoId = event.currentTarget.dataset.todo_id;
+    debugger;
+    this.props.toggleCompleted(todoId);
+  }
+
   render() {
     return (
       <div>
         <h2>Todos App</h2>
         <TodoForm inputText={this.inputText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        <Todos todos={this.props.todos} deleteTodo={this.handleDeleteTodo}/>
+        <Todos todos={this.props.todos} deleteTodo={this.handleDeleteTodo} toggleCompleted={this.handleToggleCompleted}/>
       </div>
     )
   }
@@ -59,6 +65,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (todo) => dispatch({type: ADD_TODO, todo: todo}),
+    toggleCompleted: (id) => dispatch({type: TOGGLE_COMPLETED, todo: {id: id}}),
     deleteTodo: (id) => dispatch({type: DELETE_TODO, todo: {id: id}}) 
   }
 }

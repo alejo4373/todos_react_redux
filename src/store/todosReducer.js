@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO } from './actionTypes';
+import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED }  from './actionTypes';
 const todosReducer = (state = {}, { type, todo }) => {
   const newState = {...state};
   switch (type) {
@@ -12,6 +12,10 @@ const todosReducer = (state = {}, { type, todo }) => {
       return newState;
       break; 
 
+   case TOGGLE_COMPLETED:
+      newState[todo.id].completed = !newState[todo.id].completed;
+      return newState;
+      
     default:
       return state;
   } 

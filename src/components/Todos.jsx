@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import TodoList from './TodoList';
 
 const Todos = (props) => {
-  const { todos, deleteTodo } = props;
+  const { todos, deleteTodo, toggleCompleted } = props;
     return (
       <div>
         <hr/>
-        <TodoList todos={todos} deleteTodo={deleteTodo}/>
+        <TodoList 
+          todos={todos} 
+          deleteTodo={deleteTodo}
+          toggleCompleted={toggleCompleted}
+        />
       </div>
     )
 }
