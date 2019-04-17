@@ -49,8 +49,16 @@ class TodosContainer extends Component {
     return (
       <div>
         <h2>Todos App</h2>
-        <TodoForm inputText={this.inputText} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-        <Todos todos={this.props.todos} deleteTodo={this.handleDeleteTodo} toggleCompleted={this.handleToggleCompleted}/>
+        <TodoForm
+          inputText={this.state.inputText}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
+        <Todos
+          todos={this.props.todos}
+          deleteTodo={this.handleDeleteTodo}
+          toggleCompleted={this.handleToggleCompleted}
+        />
       </div>
     )
   }
@@ -64,9 +72,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTodo: (todo) => dispatch({type: ADD_TODO, todo: todo}),
-    toggleCompleted: (id) => dispatch({type: TOGGLE_COMPLETED, todo: {id: id}}),
-    deleteTodo: (id) => dispatch({type: DELETE_TODO, todo: {id: id}}) 
+    addTodo: (todo) => dispatch({ type: ADD_TODO, todo: todo }),
+    toggleCompleted: (id) => dispatch({ type: TOGGLE_COMPLETED, todo: { id: id } }),
+    deleteTodo: (id) => dispatch({ type: DELETE_TODO, todo: { id: id } })
   }
 }
 
