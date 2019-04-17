@@ -2,10 +2,18 @@
   text-align: center;
 }
 
-.completed {
+ul {
+  list-style-type: none;
+}
+
+li > .completed {
   text-decoration: line-through;
 }
 
-ul {
-  list-style-type: none;
+li > .btn_remove {
+  display: none;
+}
+
+li:hover > .btn_remove {
+  display: unset;
 }
