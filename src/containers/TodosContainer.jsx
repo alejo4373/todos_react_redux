@@ -15,9 +15,11 @@ class TodosContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { inputText } = this.state;
+    
     const todo = {
       id: uuid(),
-      text: this.state.inputText,
+      text: inputText,
       completed: false
     }
 
