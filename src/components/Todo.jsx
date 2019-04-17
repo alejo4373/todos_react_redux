@@ -10,7 +10,7 @@ const Todo = (props) => {
           data-todo_id={todo.id}
           className={todo.completed ? "completed" : null}
         >
-          <input type="checkbox" checked={todo.completed} />
+          <input type="checkbox" readOnly checked={todo.completed} />
           {todo.text}
         </span>
         <button id={todo.id} onClick={deleteTodo}>X</button>
