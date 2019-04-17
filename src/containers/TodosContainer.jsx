@@ -27,7 +27,9 @@ class TodosContainer extends Component {
       inputText: ''
     })
 
-    this.props.addTodo(todo)
+    if (todo.text) {
+      this.props.addTodo(todo)
+    }
   }
 
   handleChange = (event) => {
