@@ -8,6 +8,7 @@ const TodoForm = (props) => {
         onChange={handleChange}
         value={inputText}
         placeholder={'Type a todo'}
+        type="text"
         autoFocus
         required
       />
