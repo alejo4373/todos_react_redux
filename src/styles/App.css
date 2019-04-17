@@ -1,4 +1,9 @@
 .App {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.App h2, form {
   text-align: center;
 }
 
@@ -6,14 +11,17 @@ ul {
   list-style-type: none;
 }
 
-li > .completed {
+.todo-item > .completed {
   text-decoration: line-through;
 }
 
-li > .btn_remove {
+.todo-item > .todo-content {
+  display: inline-block;
+}
+.todo-item > .btn_remove {
   display: none;
 }
 
-li:hover > .btn_remove {
+.todo-item:hover > .btn_remove {
   display: unset;
 }

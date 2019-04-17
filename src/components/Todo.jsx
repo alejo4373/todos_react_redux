@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 const Todo = (props) => {
   const { todo, deleteTodo, toggleCompleted } = props
   return (
-    <li>
-      <span
+    <li className="todo-item">
+      <div
         onClick={toggleCompleted}
         data-todo_id={todo.id}
-        className={todo.completed ? "completed" : null}
+        className={'todo-content ' + (todo.completed ? "completed" : "")}
       >
         <input type="checkbox" readOnly checked={todo.completed} />
         {todo.text}
-      </span>
+      </div>
       <button className="btn_remove" id={todo.id} onClick={deleteTodo}>X</button>
     </li>
   )
