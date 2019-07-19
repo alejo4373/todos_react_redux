@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
-import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from '../store/actionTypes';
+import { REQUEST_ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from '../store/actionTypes';
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
 
@@ -20,6 +20,7 @@ class TodosContainer extends Component {
     const todo = {
       id: uuid(),
       text: inputText.trim(),
+      value: 100, // Hard coded for now
       completed: false
     }
 
@@ -45,7 +46,6 @@ class TodosContainer extends Component {
 
   handleToggleCompleted = (event) => {
     const todoId = event.currentTarget.dataset.todo_id;
-    debugger;
     this.props.toggleCompleted(todoId);
   }
 
@@ -76,7 +76,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTodo: (todo) => dispatch({ type: ADD_TODO, todo: todo }),
+    addTodo: (todo) => dispatch({ type: REQUEST_ADD_TODO, todo: todo }),
     toggleCompleted: (id) => dispatch({ type: TOGGLE_COMPLETED, todo: { id: id } }),
     deleteTodo: (id) => dispatch({ type: DELETE_TODO, todo: { id: id } })
   }

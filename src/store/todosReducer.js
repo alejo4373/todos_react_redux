@@ -1,8 +1,8 @@
-import { ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED }  from './actionTypes';
+import { RECEIVE_TODO, DELETE_TODO, TOGGLE_COMPLETED }  from './actionTypes';
 const todosReducer = (state = {}, { type, todo }) => {
   const newState = {...state};
   switch (type) {
-    case ADD_TODO:
+    case RECEIVE_TODO:
       newState[todo.id] = todo;
       return newState;
       break;

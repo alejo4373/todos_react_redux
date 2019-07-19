@@ -1,4 +1,6 @@
-export const ADD_TODO = 'ADD_TODO';
+export const REQUEST_ADD_TODO = 'REQUEST_ADD_TODO';
+export const RECEIVE_TODO = 'RECEIVE_TODO';
+export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 export const DELETE_TODO = 'DELETE_TODO';
 export const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';
 
