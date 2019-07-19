@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import uuid from 'uuid/v4';
 import { REQUEST_ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from '../store/actionTypes';
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
@@ -18,7 +17,6 @@ class TodosContainer extends Component {
     const { inputText } = this.state;
     
     const todo = {
-      id: uuid(),
       text: inputText.trim(),
       value: 100, // Hard coded for now
       completed: false
