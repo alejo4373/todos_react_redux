@@ -7,9 +7,15 @@
   text-align: center;
 }
 
-form > input[type=text] {
-  width: 89%;
+form > input {
   height: 1.5em;
+}
+form > input[type=text] {
+  width: 76%;
+}
+
+form > input[type=number] {
+  width: 12%;
 }
 
 ul {
@@ -26,6 +32,7 @@ ul > .todo-item {
 button {
   height: 2em;
   width: 2em;
+  padding: 0 0;
 }
 
 .todo-item > .completed {
