@@ -9,31 +9,35 @@ class TodosContainer extends Component {
     super(props);
     this.state = {
       inputText: '',
+      todoValue: 100,
     }
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { inputText } = this.state;
+    const { inputText, todoValue } = this.state;
     
     const todo = {
       text: inputText.trim(),
-      value: 100, // Hard coded for now
+      value: todoValue,
       completed: false
     }
 
     this.setState({
-      inputText: ''
+      inputText: '',
+      todoValue: 100
     })
 
-    if (todo.text) {
+    if (todo.text && todo.value) {
       this.props.addTodo(todo)
     }
   }
 
   handleChange = (event) => {
+    const { name, value } = event.target
+
     this.setState({
-      inputText: event.target.value
+      [name]: value
     })
   }
 
@@ -53,6 +57,7 @@ class TodosContainer extends Component {
         <h2>Todos App</h2>
         <TodoForm
           inputText={this.state.inputText}
+          todoValue={this.state.todoValue}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
