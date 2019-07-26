@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { REQUEST_ADD_JOURNAL_ENTRY } from '../store/actionTypes';
 
-import { JournalForm } from '../components/Journal';
+import { JournalForm, JournalEntriesList } from '../components/Journal';
 
 class JournalContainer extends Component {
   constructor(props) {
@@ -37,6 +37,8 @@ class JournalContainer extends Component {
 
   render() {
     const { text, tag_ids } = this.state;
+    const { journal } = this.props;
+
     return (
       <div>
         <h2>Journal </h2>
@@ -46,6 +48,7 @@ class JournalContainer extends Component {
           entryText={text}      
           entryTags={tag_ids}     
         />
+        <JournalEntriesList entries={journal} />
       </div>
     )
   }
