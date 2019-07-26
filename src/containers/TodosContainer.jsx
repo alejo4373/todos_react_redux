@@ -71,10 +71,8 @@ class TodosContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    todos: state
-  }
+const mapStateToProps = ({ todos }) => {
+  return { todos }
 }
 
 const mapDispatchToProps = (dispatch) => {
