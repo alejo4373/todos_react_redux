@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { REQUEST_ADD_JOURNAL_ENTRY } from '../store/actionTypes';
+import { REQUEST_ADD_JOURNAL_ENTRY, REQUEST_JOURNAL_ENTRIES } from '../store/actionTypes';
 
 import { JournalForm, JournalEntriesList } from '../components/Journal';
 
@@ -11,6 +11,10 @@ class JournalContainer extends Component {
       text: '',
       tag_ids: [],
     }
+  }
+
+  componentDidMount = () => {
+    this.props.fetchJournalEntries();  
   }
 
   handleSubmit = (event) => {
@@ -60,7 +64,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addJournalEntry: (journalEntry) => dispatch({ 
       type: REQUEST_ADD_JOURNAL_ENTRY, journalEntry 
-    })
+    }),
+    fetchJournalEntries: () => dispatch({ type: REQUEST_JOURNAL_ENTRIES })
   }
 }
 

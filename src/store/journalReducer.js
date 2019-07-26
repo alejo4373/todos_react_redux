@@ -1,12 +1,19 @@
-import { RECEIVE_JOURNAL_ENTRY }  from './actionTypes';
+import { RECEIVE_JOURNAL_ENTRY, RECEIVE_JOURNAL_ENTRIES }  from './actionTypes';
 
-const journalReducer = (state = {}, { type, journalEntry }) => {
+const journalReducer = (state = {}, { type, payload }) => {
   const newState = {...state};
   switch (type) {
     case RECEIVE_JOURNAL_ENTRY:
-      newState[journalEntry.id] = journalEntry;
+      const { journalEntry } = payload
+      newState[journalEntry.id] = journalEntry
       return newState;
 
+    case RECEIVE_JOURNAL_ENTRIES:
+      const { entries } = payload;
+      entries.forEach(entry => {
+        newState[entry.id] = entry
+      })
+      return newState;
     default:
       return newState;
   } 
