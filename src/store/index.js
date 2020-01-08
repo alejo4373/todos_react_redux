@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import todosReducer from './todosReducer';
 import journalReducer from './journalReducer';
+import authReducer from './authReducer';
 
 import rootSaga from './sagas';
 
@@ -13,9 +14,10 @@ const store = createStore(
   combineReducers({
     todos: todosReducer,
     journal: journalReducer,
+    auth: authReducer
   }),
   composeEnhancers(
-    applyMiddleware(sagaMiddleware)  
+    applyMiddleware(sagaMiddleware)
   )
 )
 
