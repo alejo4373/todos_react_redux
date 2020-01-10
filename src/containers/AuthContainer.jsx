@@ -16,7 +16,7 @@ class AuthContainer extends Component {
   componentDidUpdate(prevProps) {
     const { auth, history, location } = this.props
     if (auth.user !== prevProps.auth.user) {
-      const { referrer } = location.state || { referrer: "/" }
+      const { referrer } = location.state || { referrer: "/todos" }
       if (auth.user) {
         history.replace(referrer)
       }
