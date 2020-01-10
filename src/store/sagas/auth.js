@@ -12,7 +12,7 @@ function* loginUser(action) {
     const { data } = yield call(api.login, action.payload.credentials)
     yield put({
       type: RECEIVE_AUTH_USER,
-      payload: { user: data.payload }
+      payload: { user: data.payload.user }
     });
   } catch (err) {
     console.log(err)

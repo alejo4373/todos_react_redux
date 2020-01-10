@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 import { Switch, Route, Link } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
 import TodosContainer from './containers/TodosContainer';
 import JournalContainer from './containers/JournalContainer';
 import AuthContainer from './containers/AuthContainer';
+import Landing from './components/Landing';
 
 class App extends Component {
   render() {
@@ -15,9 +17,10 @@ class App extends Component {
           <Link to='/journal'>Journal</Link>
         </nav>
         <Switch>
-          <Route path='/todos' component={TodosContainer} />
-          <Route path='/journal' component={JournalContainer} />
-          <Route path='/' component={AuthContainer} />
+          <PrivateRoute path='/todos' component={TodosContainer} />
+          <PrivateRoute path='/journal' component={JournalContainer} />
+          <Route path='/(login|signup)' component={AuthContainer} />
+          <Route path='/' component={Landing} />
         </Switch>
       </div>
     );

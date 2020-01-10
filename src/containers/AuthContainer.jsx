@@ -13,6 +13,16 @@ class AuthContainer extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { auth, history, location } = this.props
+    if (auth.user !== prevProps.auth.user) {
+      const { referrer } = location.state || { referrer: "/" }
+      if (auth.user) {
+        history.replace(referrer)
+      }
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     console.log('submitting form')
@@ -40,10 +50,17 @@ class AuthContainer extends Component {
   }
 
   render() {
+    const { location } = this.props
     return (
-      <Switch>
-        <Route path="/login" render={this.renderLoginForm} />
-      </Switch>
+      <>
+        {location.state && location.state.referrer
+          ? <p> You need to log in to go there </p>
+          : null
+        }
+        <Switch>
+          <Route path="/login" render={this.renderLoginForm} />
+        </Switch>
+      </>
     )
   }
 }
