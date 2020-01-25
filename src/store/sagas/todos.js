@@ -5,14 +5,14 @@ import * as api from '../../api';
 function* addTodo(action) {
   try {
     const { data } = yield call(api.addTodo, action.todo)
-    yield put({ type: RECEIVE_TODO, todo: data.payload });
+    yield put({ type: RECEIVE_TODO, todo: data.payload.todo });
   } catch (err) {
     yield put({ type: RECEIVE_ERROR, error: action.error });
   }
- }
+}
 
- function* mySaga() {
-   yield takeEvery(REQUEST_ADD_TODO, addTodo)
- }
+function* mySaga() {
+  yield takeEvery(REQUEST_ADD_TODO, addTodo)
+}
 
- export default mySaga;
+export default mySaga;
