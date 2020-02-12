@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const TodoForm = (props) => {
-  const { handleChange, handleSubmit, inputText, todoValue} = props
+  const { handleChange, handleSubmit, inputText, todoValue } = props
   return (
     <form onSubmit={handleSubmit}>
       <input

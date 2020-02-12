@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 
-import PrivateRoute from '../components/PrivateRoute';
 import TodosContainer from './TodosContainer';
 import JournalContainer from './JournalContainer';
 
