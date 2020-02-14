@@ -1,0 +1,7 @@
+.profile > .user-card {
+  text-align: center;
+}
+
+.profile > .user-card > img {
+  width: 100%;
+}
