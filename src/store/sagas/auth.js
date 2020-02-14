@@ -3,7 +3,7 @@ import {
   REQUEST_AUTH_LOGIN,
   REQUEST_AUTH_SIGNUP,
   RECEIVE_AUTH_USER,
-  REMOVE_AUTH_USER,
+  RESET_STATE,
   RECEIVE_AUTH_ERROR,
   REQUEST_AUTH_LOGOUT
 } from '../actionTypes'
@@ -40,7 +40,7 @@ function* signupUser(action) {
 function* logoutUser(action) {
   try {
     yield call(api.logout)
-    yield put({ type: REMOVE_AUTH_USER })
+    yield put({ type: RESET_STATE })
   } catch (err) {
     const { message } = err.response.data
     yield put({ type: RECEIVE_AUTH_ERROR, error: message })

@@ -1,7 +1,7 @@
-import { RECEIVE_JOURNAL_ENTRY, RECEIVE_JOURNAL_ENTRIES }  from './actionTypes';
+import { RECEIVE_JOURNAL_ENTRY, RECEIVE_JOURNAL_ENTRIES } from '../actionTypes';
 
 const journalReducer = (state = {}, { type, payload }) => {
-  const newState = {...state};
+  const newState = { ...state };
   switch (type) {
     case RECEIVE_JOURNAL_ENTRY:
       const { journalEntry } = payload
@@ -16,7 +16,7 @@ const journalReducer = (state = {}, { type, payload }) => {
       return newState;
     default:
       return newState;
-  } 
+  }
 }
 
 export default journalReducer;
