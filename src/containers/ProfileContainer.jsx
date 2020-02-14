@@ -11,6 +11,7 @@ class ProfileContainer extends Component {
 
   logoutUser = () => {
     this.props.logoutUser();
+    this.props.history.replace('/')
   }
 
   render() {
