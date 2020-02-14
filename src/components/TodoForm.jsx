@@ -22,7 +22,7 @@ const TodoForm = (props) => {
         min="100"
         required
       />
-      <button>+</button>
+      <button>Add</button>
     </form>
   )
 }

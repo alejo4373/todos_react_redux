@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { REQUEST_ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from '../store/actionTypes';
+import '../styles/Todos.css'
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
 
@@ -16,7 +17,7 @@ class TodosContainer extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { inputText, todoValue } = this.state;
-    
+
     const todo = {
       text: inputText.trim(),
       value: todoValue,
@@ -53,8 +54,8 @@ class TodosContainer extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Todos App</h2>
+      <div className='todos-container'>
+        <h2>Todos</h2>
         <TodoForm
           inputText={this.state.inputText}
           todoValue={this.state.todoValue}

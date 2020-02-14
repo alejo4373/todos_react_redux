@@ -1,0 +1,44 @@
+
+.todos-container form > input {
+  height: 17px;
+}
+.todos-container form > input[type=text] {
+  width: 71%;
+}
+
+.todos-container form > input[type=number] {
+  width: 12%;
+}
+
+.todos-container form > button {
+  height: 23px;
+}
+
+.todos-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.todos-container ul > .todo-item {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  height: 2em;
+}
+
+.todos-container .todo-item > .completed {
+  text-decoration: line-through;
+}
+
+.todos-container .todo-item > .todo-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.todos-container .todo-item > .btn_remove {
+  display: none;
+}
+
+.todos-container .todo-item:hover > .btn_remove {
+  display: unset;
+}
