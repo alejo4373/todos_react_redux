@@ -11,7 +11,7 @@ const Private = () => {
       <nav>
         <Link to='/todos' >Todos</Link>{' '}
         <Link to='/journal'>Journal</Link>{' '}
-        <Link to='/Profile'>Profile</Link>
+        <Link to='/profile'>Profile</Link>
       </nav>
       <Switch>
         <Route path='/todos' component={TodosContainer} />
