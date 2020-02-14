@@ -3,7 +3,9 @@ import {
   REQUEST_AUTH_LOGIN,
   REQUEST_AUTH_SIGNUP,
   RECEIVE_AUTH_USER,
-  RECEIVE_AUTH_ERROR
+  REMOVE_AUTH_USER,
+  RECEIVE_AUTH_ERROR,
+  REQUEST_AUTH_LOGOUT
 } from '../actionTypes'
 
 import * as api from '../../api';
@@ -35,9 +37,20 @@ function* signupUser(action) {
   }
 }
 
+function* logoutUser(action) {
+  try {
+    yield call(api.logout)
+    yield put({ type: REMOVE_AUTH_USER })
+  } catch (err) {
+    const { message } = err.response.data
+    yield put({ type: RECEIVE_AUTH_ERROR, error: message })
+  }
+}
+
 function* authSagaWatcher() {
   yield takeEvery(REQUEST_AUTH_LOGIN, loginUser);
   yield takeEvery(REQUEST_AUTH_SIGNUP, signupUser);
+  yield takeEvery(REQUEST_AUTH_LOGOUT, logoutUser);
 }
 
 export default authSagaWatcher;

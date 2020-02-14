@@ -1,4 +1,4 @@
-import { RECEIVE_AUTH_USER } from './actionTypes';
+import { RECEIVE_AUTH_USER, REMOVE_AUTH_USER } from './actionTypes';
 
 const authReducer = (state = {}, { type, payload }) => {
   const newState = { ...state };
@@ -6,6 +6,10 @@ const authReducer = (state = {}, { type, payload }) => {
     case RECEIVE_AUTH_USER:
       const { user } = payload
       newState.user = user;
+      return newState;
+
+    case REMOVE_AUTH_USER:
+      newState.user = null;
       return newState;
 
     default:
