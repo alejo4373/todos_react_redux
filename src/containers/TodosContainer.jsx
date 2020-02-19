@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { REQUEST_ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED } from '../store/actionTypes';
+import { REQUEST_ADD_TODO, DELETE_TODO, TOGGLE_COMPLETED, REQUEST_FETCH_TODOS } from '../store/actionTypes';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
@@ -12,6 +12,10 @@ class TodosContainer extends Component {
       inputText: '',
       todoValue: 100,
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchTodos()
   }
 
   handleSubmit = (event) => {
@@ -79,8 +83,9 @@ const mapStateToProps = ({ todos }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (todo) => dispatch({ type: REQUEST_ADD_TODO, todo: todo }),
-    toggleCompleted: (id) => dispatch({ type: TOGGLE_COMPLETED, todo: { id: id } }),
-    deleteTodo: (id) => dispatch({ type: DELETE_TODO, todo: { id: id } })
+    fetchTodos: () => dispatch({ type: REQUEST_FETCH_TODOS }),
+    toggleCompleted: (id) => dispatch({ type: TOGGLE_COMPLETED, payload: { todo: { id: id } } }),
+    deleteTodo: (id) => dispatch({ type: DELETE_TODO, payload: { todo: { id: id } } })
   }
 }
 
