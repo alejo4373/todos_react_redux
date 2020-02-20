@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { REQUEST_ADD_TODO, DELETE_TODO, REQUEST_FETCH_TODOS, REQUEST_UPDATE_TODO } from '../store/actionTypes';
+import { REQUEST_ADD_TODO, DELETE_TODO, REQUEST_FETCH_TODOS, REQUEST_UPDATE_TODO, REQUEST_DELETE_TODO } from '../store/actionTypes';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
@@ -92,7 +92,10 @@ const mapDispatchToProps = (dispatch) => {
       type: REQUEST_UPDATE_TODO,
       payload: { id, todoUpdates }
     }),
-    deleteTodo: (id) => dispatch({ type: DELETE_TODO, payload: { todo: { id: id } } })
+    deleteTodo: (id) => dispatch({ 
+      type: REQUEST_DELETE_TODO,
+      payload: { id }  
+    })
   }
 }
 

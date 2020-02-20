@@ -1,4 +1,4 @@
-import { RECEIVE_TODO, DELETE_TODO, RECEIVE_TODOS } from '../actionTypes';
+import { RECEIVE_TODO, REMOVE_TODO, RECEIVE_TODOS } from '../actionTypes';
 import { normalizeTodos } from '../helpers';
 
 const todosReducer = (state = {}, { type, payload }) => {
@@ -13,7 +13,7 @@ const todosReducer = (state = {}, { type, payload }) => {
       newState = normalizeTodos(todos)
       return newState;
 
-    case DELETE_TODO:
+    case REMOVE_TODO:
       delete newState[todo.id];
       return newState;
 
