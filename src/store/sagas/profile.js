@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { REQUEST_USER, RECEIVE_USER } from '../actionTypes'
 import * as api from '../../api';
+import { REQUEST_USER, RECEIVE_USER } from '../actionTypes/profile'
 
 function* getUser({ type }) {
   try {

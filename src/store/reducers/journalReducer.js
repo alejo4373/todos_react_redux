@@ -1,4 +1,7 @@
-import { RECEIVE_JOURNAL_ENTRY, RECEIVE_JOURNAL_ENTRIES } from '../actionTypes';
+import { 
+  RECEIVE_JOURNAL_ENTRY, 
+  RECEIVE_JOURNAL_ENTRIES 
+} from '../actionTypes/journal';
 
 const journalReducer = (state = {}, { type, payload }) => {
   const newState = { ...state };

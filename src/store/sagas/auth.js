@@ -1,14 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import * as api from '../../api';
+import { RESET_STATE } from '../actionTypes/comm'
 import {
+  RECEIVE_AUTH_USER,
+  RECEIVE_AUTH_ERROR,
+
   REQUEST_AUTH_LOGIN,
   REQUEST_AUTH_SIGNUP,
-  RECEIVE_AUTH_USER,
-  RESET_STATE,
-  RECEIVE_AUTH_ERROR,
   REQUEST_AUTH_LOGOUT
-} from '../actionTypes'
-
-import * as api from '../../api';
+} from '../actionTypes/auth'
 
 function* loginUser(action) {
   try {

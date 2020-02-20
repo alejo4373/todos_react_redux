@@ -1,4 +1,4 @@
-import { RECEIVE_AUTH_USER } from '../actionTypes';
+import { RECEIVE_AUTH_USER } from '../actionTypes/auth';
 
 const authReducer = (state = {}, { type, payload }) => {
   const newState = { ...state };

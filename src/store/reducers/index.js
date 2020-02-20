@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { RESET_STATE } from '../actionTypes';
+import { RESET_STATE } from '../actionTypes/comm';
 
 import todosReducer from './todosReducer';
 import journalReducer from './journalReducer';

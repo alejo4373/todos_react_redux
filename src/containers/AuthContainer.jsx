@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { REQUEST_AUTH_LOGIN, REQUEST_AUTH_SIGNUP } from '../store/actionTypes'
+import { REQUEST_AUTH_LOGIN, REQUEST_AUTH_SIGNUP } from '../store/actionTypes/auth'
 import LoginForm from '../components/Auth/LoginForm';
 import SignupForm from '../components/Auth/SignupForm';
 

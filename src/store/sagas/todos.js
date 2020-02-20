@@ -1,16 +1,16 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import * as api from '../../api';
+import { RECEIVE_ERROR } from '../actionTypes/comm';
 import {
   RECEIVE_TODO,
+  REMOVE_TODO,
   RECEIVE_TODOS,
+
   REQUEST_ADD_TODO,
   REQUEST_UPDATE_TODO,
   REQUEST_DELETE_TODO,
   REQUEST_FETCH_TODOS,
-  RECEIVE_ERROR,
-  REMOVE_TODO,
-} from '../actionTypes'
-
-import * as api from '../../api';
+} from '../actionTypes/todos'
 
 function* addTodo(action) {
   try {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { REQUEST_USER, REQUEST_AUTH_LOGOUT } from '../store/actionTypes';
+import { REQUEST_USER } from '../store/actionTypes/profile';
+import { REQUEST_AUTH_LOGOUT } from '../store/actionTypes/auth';
 import UserCard from '../components/Profile/UserCard';
 import '../styles/Profile.css';
 

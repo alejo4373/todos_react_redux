@@ -1,12 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import * as api from '../../api';
+import { RECEIVE_ERROR } from '../actionTypes/comm';
 import { 
   RECEIVE_JOURNAL_ENTRY,
-  RECEIVE_ERROR,
+  RECEIVE_JOURNAL_ENTRIES,
+
   REQUEST_ADD_JOURNAL_ENTRY,
   REQUEST_JOURNAL_ENTRIES,
-  RECEIVE_JOURNAL_ENTRIES
-  } from '../actionTypes'
-import * as api from '../../api';
+} from '../actionTypes/journal'
 
 function* addJournalEntry(action) {
   try {

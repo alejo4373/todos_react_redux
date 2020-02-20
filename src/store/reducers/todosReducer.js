@@ -1,4 +1,4 @@
-import { RECEIVE_TODO, REMOVE_TODO, RECEIVE_TODOS } from '../actionTypes';
+import { RECEIVE_TODO, REMOVE_TODO, RECEIVE_TODOS } from '../actionTypes/todos';
 import { normalizeTodos } from '../helpers';
 
 const todosReducer = (state = {}, { type, payload }) => {

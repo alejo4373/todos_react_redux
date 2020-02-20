@@ -1,4 +1,4 @@
-import { RECEIVE_USER } from '../actionTypes';
+import { RECEIVE_USER } from '../actionTypes/profile';
 
 const profileReducer = (state = {}, { type, payload }) => {
   const newState = { ...state }
