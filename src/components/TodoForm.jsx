@@ -10,7 +10,6 @@ const TodoForm = (props) => {
         value={inputText}
         placeholder={'Type a todo'}
         type="text"
-        autoFocus
         required
       />
       <input

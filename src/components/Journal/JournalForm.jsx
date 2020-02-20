@@ -10,7 +10,6 @@ const JournalForm = (props) => {
         value={entryText}
         placeholder={'Type a journal entry'}
         type="text"
-        autoFocus
         required
       />
       <input
