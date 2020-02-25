@@ -1,15 +1,35 @@
-import { RECEIVE_AUTH_USER } from '../actionTypes/auth';
+import {
+  RECEIVE_AUTH_SUCCESS,
+  RECEIVE_AUTH_ERROR,
+  SET_AUTH_LOADING
+} from '../actionTypes/auth';
 
-const authReducer = (state = {}, { type, payload }) => {
+const initialState = {
+  username: '',
+  loggedIn: false
+}
+
+const authReducer = (state = initialState, { type, payload }) => {
   const newState = { ...state };
   switch (type) {
-    case RECEIVE_AUTH_USER:
-      const { user } = payload
-      newState.user = user;
+    case RECEIVE_AUTH_SUCCESS:
+      newState.username = payload.username;
+      newState.loggedIn = true;
+      newState.loading = false;
       return newState;
 
-    default:
+    case RECEIVE_AUTH_ERROR:
+      newState.loggedIn = false;
+      newState.loading = false;
       return newState;
+
+    case SET_AUTH_LOADING:
+      newState.loading = true;
+      return newState;
+
+
+    default:
+      return state;
   }
 }
 

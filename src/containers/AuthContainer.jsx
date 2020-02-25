@@ -15,16 +15,6 @@ class AuthContainer extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { auth, history, location } = this.props
-    if (auth.user !== prevProps.auth.user) {
-      const { referrer } = location.state || { referrer: "/profile" }
-      if (auth.user) {
-        history.replace(referrer)
-      }
-    }
-  }
-
   handleSubmit = (e) => {
     e.preventDefault()
     const formName = e.target.name
@@ -71,7 +61,12 @@ class AuthContainer extends Component {
   }
 
   render() {
-    const { location } = this.props
+    const { history, location, auth } = this.props
+    const { referrer } = location.state || { referrer: "/profile" }
+    if (auth.loggedIn) {
+      history.replace(referrer)
+    }
+
     return (
       <>
         {location.state && location.state.referrer
