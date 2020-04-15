@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
 import TodoForm from '../components/TodoForm';
-import { 
-  REQUEST_ADD_TODO, 
+import TodoPage from '../components/TodoPage';
+import {
+  REQUEST_ADD_TODO,
   REQUEST_FETCH_TODOS,
+  REQUEST_FETCH_TODO,
   REQUEST_UPDATE_TODO,
-  REQUEST_DELETE_TODO 
+  REQUEST_DELETE_TODO
 } from '../store/actionTypes/todos';
+import { Switch, Route } from 'react-router';
 
 class TodosContainer extends Component {
   constructor(props) {
@@ -16,6 +19,7 @@ class TodosContainer extends Component {
     this.state = {
       inputText: '',
       todoValue: 100,
+      todo: null
     }
   }
 
@@ -65,7 +69,19 @@ class TodosContainer extends Component {
     this.props.updateTodo(todoId, todoUpdates);
   }
 
-  render() {
+  getTodo = (id) => {
+    const { todos } = this.props
+    const todo = todos[id]
+    if (todo) {
+      console.log('todo already in state', todo)
+      this.setState({ todo })
+    } else {
+      console.log('todo not in state fetching with id:', id)
+      this.props.fetchTodo(id)
+    }
+  }
+
+  renderTodos = () => {
     return (
       <div className='todos-container'>
         <h2>Todos</h2>
@@ -83,6 +99,20 @@ class TodosContainer extends Component {
       </div>
     )
   }
+
+  renderTodoPage = (routeProps) => {
+    return <TodoPage {...routeProps} getTodo={this.getTodo} todo={this.state.todo} />
+  }
+
+  render() {
+    const { path } = this.props.match
+    return (
+      <Switch>
+        <Route path={`${path}/:id`} render={this.renderTodoPage} />
+        <Route path={path} render={this.renderTodos} />
+      </Switch>
+    )
+  }
 }
 
 const mapStateToProps = ({ todos }) => {
@@ -93,13 +123,14 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (todo) => dispatch({ type: REQUEST_ADD_TODO, todo: todo }),
     fetchTodos: () => dispatch({ type: REQUEST_FETCH_TODOS }),
-    updateTodo: (id, todoUpdates) => dispatch({ 
+    fetchTodo: (id) => dispatch({ type: REQUEST_FETCH_TODO, id }),
+    updateTodo: (id, todoUpdates) => dispatch({
       type: REQUEST_UPDATE_TODO,
       payload: { id, todoUpdates }
     }),
-    deleteTodo: (id) => dispatch({ 
+    deleteTodo: (id) => dispatch({
       type: REQUEST_DELETE_TODO,
-      payload: { id }  
+      payload: { id }
     })
   }
 }

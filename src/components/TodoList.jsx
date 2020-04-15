@@ -1,5 +1,5 @@
 import React from 'react';
-import Todo from './Todo';
+import TodoItem from './TodoItem';
 
 const TodoList = (props) => {
   const { todos, deleteTodo, toggleCompleted } = props;
@@ -7,7 +7,7 @@ const TodoList = (props) => {
 
   for (let todo in todos) {
     todosList.push(
-      <Todo
+      <TodoItem
         key={todos[todo].id}
         todo={todos[todo]}
         deleteTodo={deleteTodo}
