@@ -25,7 +25,7 @@
   margin: 1em 0;
 }
 
-.todos-container .todo-item > .completed {
+.completed  {
   text-decoration: line-through;
 }
 

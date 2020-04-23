@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TodoList from './TodoList';
 
-const Todos = (props) => {
-  const { todos, deleteTodo, toggleCompleted } = props;
-  return (
-    <div>
-      <hr />
-      <TodoList
-        todos={todos}
-        deleteTodo={deleteTodo}
-        toggleCompleted={toggleCompleted}
-      />
-    </div>
-  )
-}
+class Todos extends Component {
+  componentDidMount() {
+    this.props.getAllTodos()
+  }
 
+  render() {
+    const { todos, deleteTodo, toggleCompleted } = this.props;
+    return (
+      <div>
+        <hr />
+        <TodoList
+          todos={todos}
+          deleteTodo={deleteTodo}
+          toggleCompleted={toggleCompleted}
+        />
+      </div>
+    )
+  }
+}
 export default Todos;

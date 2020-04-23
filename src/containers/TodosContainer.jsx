@@ -23,10 +23,7 @@ class TodosContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.fetchTodos()
-  }
-
+  /* Event Handlers */
   handleSubmit = (event) => {
     event.preventDefault();
     const { inputText, todoValue } = this.state;
@@ -60,6 +57,15 @@ class TodosContainer extends Component {
     this.props.deleteTodo(todoId)
   }
 
+  /* Todo's Ops */
+  getAllTodos = () => {
+    this.props.fetchTodos()
+  }
+
+  getTodo = (id) => {
+    this.props.fetchTodo(id)
+  }
+
   handleToggleCompleted = (event) => {
     const todoId = event.currentTarget.dataset.todo_id;
     const todo = this.props.todos[todoId]
@@ -67,18 +73,6 @@ class TodosContainer extends Component {
       completed: !todo.completed
     }
     this.props.updateTodo(todoId, todoUpdates);
-  }
-
-  getTodo = (id) => {
-    const { todos } = this.props
-    const todo = todos[id]
-    if (todo) {
-      console.log('todo already in state', todo)
-      this.setState({ todo })
-    } else {
-      console.log('todo not in state fetching with id:', id)
-      this.props.fetchTodo(id)
-    }
   }
 
   renderTodos = () => {
@@ -95,13 +89,23 @@ class TodosContainer extends Component {
           todos={this.props.todos}
           deleteTodo={this.handleDeleteTodo}
           toggleCompleted={this.handleToggleCompleted}
+          getAllTodos={this.getAllTodos}
         />
       </div>
     )
   }
 
   renderTodoPage = (routeProps) => {
-    return <TodoPage {...routeProps} getTodo={this.getTodo} todo={this.state.todo} />
+    const { id } = routeProps.match.params
+    const todo = this.props.todos[id]
+    return (
+      <TodoPage
+        {...routeProps}
+        getTodo={this.getTodo}
+        todo={todo}
+        toggleCompleted={this.handleToggleCompleted}
+      />
+    )
   }
 
   render() {
