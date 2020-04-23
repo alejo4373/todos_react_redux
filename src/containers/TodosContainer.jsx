@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
-import TodoForm from '../components/TodoForm';
 import TodoPage from '../components/TodoPage';
 import {
   REQUEST_ADD_TODO,
@@ -14,50 +13,13 @@ import {
 import { Switch, Route } from 'react-router';
 
 class TodosContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputText: '',
-      todoValue: 100,
-      todo: null
-    }
-  }
 
-  /* Event Handlers */
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { inputText, todoValue } = this.state;
-
-    const todo = {
-      text: inputText.trim(),
-      value: todoValue,
-      completed: false
-    }
-
-    this.setState({
-      inputText: '',
-      todoValue: 100
-    })
-
-    if (todo.text && todo.value) {
-      this.props.addTodo(todo)
-    }
-  }
-
-  handleChange = (event) => {
-    const { name, value } = event.target
-
-    this.setState({
-      [name]: value
-    })
-  }
-
+  /* Todo's Ops */
   handleDeleteTodo = (event) => {
     const todoId = event.target.id;
     this.props.deleteTodo(todoId)
   }
 
-  /* Todo's Ops */
   getAllTodos = () => {
     this.props.fetchTodos()
   }
@@ -77,21 +39,13 @@ class TodosContainer extends Component {
 
   renderTodos = () => {
     return (
-      <div className='todos-container'>
-        <h2>Todos</h2>
-        <TodoForm
-          inputText={this.state.inputText}
-          todoValue={this.state.todoValue}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-        <Todos
-          todos={this.props.todos}
-          deleteTodo={this.handleDeleteTodo}
-          toggleCompleted={this.handleToggleCompleted}
-          getAllTodos={this.getAllTodos}
-        />
-      </div>
+      <Todos
+        todos={this.props.todos}
+        deleteTodo={this.handleDeleteTodo}
+        toggleCompleted={this.handleToggleCompleted}
+        getAllTodos={this.getAllTodos}
+        addTodo={this.props.addTodo}
+      />
     )
   }
 
