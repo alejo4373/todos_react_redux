@@ -2,58 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
-import TodoForm from '../components/TodoForm';
-import { 
-  REQUEST_ADD_TODO, 
+import TodoPage from '../components/TodoPage';
+import {
+  REQUEST_ADD_TODO,
   REQUEST_FETCH_TODOS,
+  REQUEST_FETCH_TODO,
   REQUEST_UPDATE_TODO,
-  REQUEST_DELETE_TODO 
+  REQUEST_DELETE_TODO
 } from '../store/actionTypes/todos';
+import { Switch, Route } from 'react-router';
 
 class TodosContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputText: '',
-      todoValue: 100,
-    }
-  }
 
-  componentDidMount() {
-    this.props.fetchTodos()
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { inputText, todoValue } = this.state;
-
-    const todo = {
-      text: inputText.trim(),
-      value: todoValue,
-      completed: false
-    }
-
-    this.setState({
-      inputText: '',
-      todoValue: 100
-    })
-
-    if (todo.text && todo.value) {
-      this.props.addTodo(todo)
-    }
-  }
-
-  handleChange = (event) => {
-    const { name, value } = event.target
-
-    this.setState({
-      [name]: value
-    })
-  }
-
+  /* Todo's Ops */
   handleDeleteTodo = (event) => {
     const todoId = event.target.id;
     this.props.deleteTodo(todoId)
+  }
+
+  getAllTodos = () => {
+    this.props.fetchTodos()
+  }
+
+  getTodo = (id) => {
+    this.props.fetchTodo(id)
   }
 
   handleToggleCompleted = (event) => {
@@ -65,22 +37,38 @@ class TodosContainer extends Component {
     this.props.updateTodo(todoId, todoUpdates);
   }
 
-  render() {
+  renderTodos = () => {
     return (
-      <div className='todos-container'>
-        <h2>Todos</h2>
-        <TodoForm
-          inputText={this.state.inputText}
-          todoValue={this.state.todoValue}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-        <Todos
-          todos={this.props.todos}
-          deleteTodo={this.handleDeleteTodo}
-          toggleCompleted={this.handleToggleCompleted}
-        />
-      </div>
+      <Todos
+        todos={this.props.todos}
+        deleteTodo={this.handleDeleteTodo}
+        toggleCompleted={this.handleToggleCompleted}
+        getAllTodos={this.getAllTodos}
+        addTodo={this.props.addTodo}
+      />
+    )
+  }
+
+  renderTodoPage = (routeProps) => {
+    const { id } = routeProps.match.params
+    const todo = this.props.todos[id]
+    return (
+      <TodoPage
+        {...routeProps}
+        getTodo={this.getTodo}
+        todo={todo}
+        toggleCompleted={this.handleToggleCompleted}
+      />
+    )
+  }
+
+  render() {
+    const { path } = this.props.match
+    return (
+      <Switch>
+        <Route path={`${path}/:id`} render={this.renderTodoPage} />
+        <Route path={path} render={this.renderTodos} />
+      </Switch>
     )
   }
 }
@@ -93,13 +81,14 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (todo) => dispatch({ type: REQUEST_ADD_TODO, todo: todo }),
     fetchTodos: () => dispatch({ type: REQUEST_FETCH_TODOS }),
-    updateTodo: (id, todoUpdates) => dispatch({ 
+    fetchTodo: (id) => dispatch({ type: REQUEST_FETCH_TODO, id }),
+    updateTodo: (id, todoUpdates) => dispatch({
       type: REQUEST_UPDATE_TODO,
       payload: { id, todoUpdates }
     }),
-    deleteTodo: (id) => dispatch({ 
+    deleteTodo: (id) => dispatch({
       type: REQUEST_DELETE_TODO,
-      payload: { id }  
+      payload: { id }
     })
   }
 }

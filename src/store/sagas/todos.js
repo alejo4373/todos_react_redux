@@ -10,6 +10,7 @@ import {
   REQUEST_UPDATE_TODO,
   REQUEST_DELETE_TODO,
   REQUEST_FETCH_TODOS,
+  REQUEST_FETCH_TODO,
 } from '../actionTypes/todos'
 
 function* addTodo(action) {
@@ -41,6 +42,16 @@ function* fetchTodos(action) {
   }
 }
 
+function* fetchTodo(action) {
+  try {
+    const { data } = yield call(api.fetchTodo, action.id)
+    yield put({ type: RECEIVE_TODO, payload: data.payload });
+  } catch (err) {
+    console.log(err)
+    yield put({ type: RECEIVE_ERROR, error: err });
+  }
+}
+
 function* deleteTodo(action) {
   const { payload } = action
   try {
@@ -55,6 +66,7 @@ function* deleteTodo(action) {
 function* todosSagaWatcher() {
   yield takeEvery(REQUEST_ADD_TODO, addTodo)
   yield takeEvery(REQUEST_FETCH_TODOS, fetchTodos)
+  yield takeEvery(REQUEST_FETCH_TODO, fetchTodo)
   yield takeEvery(REQUEST_UPDATE_TODO, updateTodo)
   yield takeEvery(REQUEST_DELETE_TODO, deleteTodo)
 }

@@ -21,11 +21,11 @@
 
 .todos-container ul > .todo-item {
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 7% 83% 10%;
   margin: 1em 0;
 }
 
-.todos-container .todo-item > .completed {
+.completed  {
   text-decoration: line-through;
 }
 

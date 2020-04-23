@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const addTodo = (todo) => axios.post('/api/todos', todo)
 export const fetchTodos = () => axios.get('/api/todos')
+export const fetchTodo = (id) => axios.get(`/api/todos/${id}`)
 export const updateTodo = (id, updates) => axios.patch(`/api/todos/${id}`, updates)
 export const deleteTodo = (id) => axios.delete(`/api/todos/${id}`)
 
