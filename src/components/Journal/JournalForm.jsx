@@ -2,16 +2,24 @@ import React from 'react';
 
 const JournalForm = (props) => {
   const { handleChange, handleSubmit, entryText, entryTags } = props
+
+  const handleTextarea = (e) => {
+    e.target.style.height = "6em"
+    e.target.style.height = `${e.target.scrollHeight}px`
+    handleChange(e)
+  }
+
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <textarea
         name='text'
-        onChange={handleChange}
+        onChange={handleTextarea}
         value={entryText}
         placeholder={'Type a journal entry'}
         type="text"
         required
-      />
+      >
+      </textarea>
       <input
         name='tag_ids'
         onChange={handleChange}

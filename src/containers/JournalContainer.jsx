@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import "../styles/Journal.css"
 import { REQUEST_ADD_JOURNAL_ENTRY, REQUEST_JOURNAL_ENTRIES } from '../store/actionTypes/journal';
-
 import { JournalForm, JournalEntriesList } from '../components/Journal';
 
 class JournalContainer extends Component {
@@ -14,13 +14,13 @@ class JournalContainer extends Component {
   }
 
   componentDidMount = () => {
-    this.props.fetchJournalEntries();  
+    this.props.fetchJournalEntries();
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
     const { text, tag_ids } = this.state;
-    
+
     if (text && tag_ids.length) {
       const journalEntry = {
         text: text.trim(),
@@ -44,13 +44,13 @@ class JournalContainer extends Component {
     const { journal } = this.props;
 
     return (
-      <div>
+      <div className="journal-container">
         <h2>Journal </h2>
         <JournalForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          entryText={text}      
-          entryTags={tag_ids}     
+          entryText={text}
+          entryTags={tag_ids}
         />
         <JournalEntriesList entries={journal} />
       </div>
@@ -62,8 +62,8 @@ const mapStateToProps = ({ journal }) => ({ journal })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addJournalEntry: (journalEntry) => dispatch({ 
-      type: REQUEST_ADD_JOURNAL_ENTRY, journalEntry 
+    addJournalEntry: (journalEntry) => dispatch({
+      type: REQUEST_ADD_JOURNAL_ENTRY, journalEntry
     }),
     fetchJournalEntries: () => dispatch({ type: REQUEST_JOURNAL_ENTRIES })
   }
