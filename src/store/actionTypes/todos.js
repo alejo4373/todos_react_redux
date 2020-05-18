@@ -7,4 +7,6 @@ export const REQUEST_FETCH_TODO = 'REQUEST_FETCH_TODO';
 export const RECEIVE_TODO = 'RECEIVE_TODO';
 export const RECEIVE_TODOS = 'RECEIVE_TODOS';
 export const REMOVE_TODO = 'REMOVE_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const SET_TODOS_FILTER = 'SET_TODOS_FILTER';
 

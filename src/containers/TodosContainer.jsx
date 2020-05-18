@@ -8,7 +8,8 @@ import {
   REQUEST_FETCH_TODOS,
   REQUEST_FETCH_TODO,
   REQUEST_UPDATE_TODO,
-  REQUEST_DELETE_TODO
+  REQUEST_DELETE_TODO,
+  SET_TODOS_FILTER
 } from '../store/actionTypes/todos';
 import { Switch, Route } from 'react-router';
 
@@ -28,23 +29,43 @@ class TodosContainer extends Component {
     this.props.fetchTodo(id)
   }
 
+  filterTodos = (id) => {
+    this.props.setTodosFilter(id)
+  }
+
   handleToggleCompleted = (event) => {
     const todoId = event.currentTarget.dataset.todo_id;
-    const todo = this.props.todos[todoId]
+    const todo = this.props.todos.find(t => t.id === parseInt(todoId))
     const todoUpdates = {
       completed: !todo.completed
     }
     this.props.updateTodo(todoId, todoUpdates);
   }
 
+  applyTodosFilter = (todos, filter) => {
+    switch (filter) {
+      case "completed":
+        return todos.filter(todo => todo.completed);
+      case "incomplete":
+        return todos.filter(todo => !todo.completed);
+      case "all":
+      default:
+        return todos
+    }
+  }
+
   renderTodos = () => {
+    const { todos, filter } = this.props
+    let filteredTodos = this.applyTodosFilter(todos, filter)
     return (
       <Todos
-        todos={this.props.todos}
+        todos={filteredTodos}
         deleteTodo={this.handleDeleteTodo}
         toggleCompleted={this.handleToggleCompleted}
         getAllTodos={this.getAllTodos}
         addTodo={this.props.addTodo}
+        setTodosFilter={this.props.setTodosFilter}
+        filterValue={filter}
       />
     )
   }
@@ -64,6 +85,7 @@ class TodosContainer extends Component {
 
   render() {
     const { path } = this.props.match
+    console.log('rendering =>', this.props.todos)
     return (
       <Switch>
         <Route path={`${path}/:id`} render={this.renderTodoPage} />
@@ -72,9 +94,16 @@ class TodosContainer extends Component {
     )
   }
 }
-
+let prevTodos = undefined
 const mapStateToProps = ({ todos }) => {
-  return { todos }
+  console.log('mstp', todos)
+  if (prevTodos === todos) {
+    console.log('same todos', prevTodos, todos)
+  } else {
+    console.log('setting prev todos', todos)
+    prevTodos = todos
+  }
+  return todos
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -89,7 +118,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteTodo: (id) => dispatch({
       type: REQUEST_DELETE_TODO,
       payload: { id }
-    })
+    }),
+    setTodosFilter: (filter) => dispatch({ type: SET_TODOS_FILTER, payload: { filter } }),
   }
 }
 

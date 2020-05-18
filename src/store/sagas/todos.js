@@ -5,6 +5,7 @@ import {
   RECEIVE_TODO,
   REMOVE_TODO,
   RECEIVE_TODOS,
+  UPDATE_TODO,
 
   REQUEST_ADD_TODO,
   REQUEST_UPDATE_TODO,
@@ -26,7 +27,7 @@ function* updateTodo(action) {
   const { payload } = action
   try {
     const { data } = yield call(api.updateTodo, payload.id, payload.todoUpdates)
-    yield put({ type: RECEIVE_TODO, payload: data.payload });
+    yield put({ type: UPDATE_TODO, payload: data.payload });
   } catch (err) {
     yield put({ type: RECEIVE_ERROR, error: action.error });
   }

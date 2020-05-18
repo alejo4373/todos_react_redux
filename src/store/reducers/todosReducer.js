@@ -1,19 +1,37 @@
-import { RECEIVE_TODO, REMOVE_TODO, RECEIVE_TODOS } from '../actionTypes/todos';
+import { RECEIVE_TODO, REMOVE_TODO, RECEIVE_TODOS, SET_TODOS_FILTER, UPDATE_TODO } from '../actionTypes/todos';
 
-const todosReducer = (state = [], { type, payload }) => {
-  const { todo, todos } = payload || {};
-  let newState = [...state];
+const initialState = {
+  todos: [],
+  filter: "all"
+}
+
+const todosReducer = (state = initialState, { type, payload }) => {
+  const { todo, todos, filter } = payload || {};
+  let newState = { ...state };
+
   switch (type) {
+    case SET_TODOS_FILTER:
+      newState.filter = filter
+      return newState;
+
     case RECEIVE_TODO:
-      newState.unshift(todo);
+      newState.todos = [todo, ...newState.todos]
       return newState;
 
     case RECEIVE_TODOS:
-      newState = todos
+      newState.todos = todos
       return newState;
 
     case REMOVE_TODO:
-      return newState.filter(t => t.id !== todo.id);
+      newState.todos = newState.todos.filter(t => t.id !== todo.id);
+      return newState;
+
+    case UPDATE_TODO:
+      newState.todos = newState.todos.map(t => {
+        if (t.id === todo.id) return todo
+        return t
+      });
+      return newState;
 
     default:
       return state;

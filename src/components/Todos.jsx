@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TodoForm from '../components/TodoForm';
 import TodoItem from './TodoItem';
+import TodosFilter from './Todos/TodosFilter';
 
 class Todos extends Component {
   state = {
@@ -42,8 +43,12 @@ class Todos extends Component {
     })
   }
 
+  handleFilterChange = (e) => {
+    this.props.setTodosFilter(e.target.value)
+  }
+
   render() {
-    const { todos, deleteTodo, toggleCompleted } = this.props;
+    const { todos, deleteTodo, toggleCompleted, filterValue } = this.props;
     return (
       <div className='todos-container'>
         <h2>Todos</h2>
@@ -54,8 +59,9 @@ class Todos extends Component {
           handleSubmit={this.handleSubmit}
         />
         <hr />
+        <TodosFilter handleFilterChange={this.handleFilterChange} filterValue={filterValue} />
         <ul>{
-          Object.values(todos).map(todo => (
+          todos.map(todo => (
             <TodoItem
               key={todo.id}
               todo={todo}
