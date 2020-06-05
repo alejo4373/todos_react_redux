@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 
 class TodoPage extends Component {
+  state = {
+    text: '',
+    editing: false
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.todo !== this.props.todo) {
+      this.setState({
+        text: this.props.todo.text
+      })
+    }
+  }
+
   componentDidMount() {
     const { id } = this.props.match.params
     this.props.getTodo(id)
@@ -10,7 +23,33 @@ class TodoPage extends Component {
     this.props.toggleCompleted(this.props.todo)
   }
 
+  handleEditButton = () => {
+    this.setState({
+      editing: true
+    })
+  }
+
+  handleEditSave = () => {
+    const { todo, updateTodo } = this.props
+    const todoUpdates = {
+      text: this.state.text
+    }
+
+    updateTodo(todo.id, todoUpdates)
+
+    this.setState({
+      editing: false
+    })
+  }
+
+  handleTodoText = (e) => {
+    this.setState({
+      text: e.target.value
+    })
+  }
+
   render() {
+    const { editing, text } = this.state;
     const { todo, deleteTodo } = this.props;
 
     if (!todo) {
@@ -20,14 +59,22 @@ class TodoPage extends Component {
     return (
       <div>
         <div
-          onClick={this.handleToggleCompleted}
           data-todo_id={todo.id}
           className={'todo-content ' + (todo.completed ? "completed" : "")}
         >
           <input type="checkbox" readOnly checked={todo.completed} />
-          {todo.text}
+          {
+            editing
+              ? (<input type="text" value={text} onChange={this.handleTodoText} />)
+              : (todo.text)
+          }
         </div>
         <button className="btn_remove" id={todo.id} onClick={deleteTodo}>X</button>
+        {
+          editing
+            ? (<button className="btn" onClick={this.handleEditSave}>Save</button>)
+            : (<button className="btn" onClick={this.handleEditButton}>Edit</button>)
+        }
       </div>
     )
   }

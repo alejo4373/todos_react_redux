@@ -40,6 +40,10 @@ class TodosContainer extends Component {
     this.props.updateTodo(todo.id, todoUpdates);
   }
 
+  updateTodo = (todoId, updates) => {
+    this.props.updateTodo(todoId, updates)
+  }
+
   applyTodosFilter = (todos, filter) => {
     switch (filter) {
       case "completed":
@@ -76,6 +80,7 @@ class TodosContainer extends Component {
         getTodo={this.getTodo}
         todo={todo}
         toggleCompleted={this.toggleCompleted}
+        updateTodo={this.updateTodo}
       />
     )
   }
