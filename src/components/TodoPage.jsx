@@ -3,10 +3,7 @@ import React, { Component } from 'react';
 class TodoPage extends Component {
   componentDidMount() {
     const { id } = this.props.match.params
-    const { getTodo, todo } = this.props
-    if (!todo) {
-      getTodo(id)
-    }
+    this.props.getTodo(id)
   }
 
   render() {

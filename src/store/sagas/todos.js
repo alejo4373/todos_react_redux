@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import * as api from '../../api';
 import { RECEIVE_ERROR } from '../actionTypes/comm';
 import {
@@ -6,6 +6,7 @@ import {
   REMOVE_TODO,
   RECEIVE_TODOS,
   UPDATE_TODO,
+  SET_ACTIVE_TODO,
 
   REQUEST_ADD_TODO,
   REQUEST_UPDATE_TODO,
@@ -45,8 +46,14 @@ function* fetchTodos(action) {
 
 function* fetchTodo(action) {
   try {
-    const { data } = yield call(api.fetchTodo, action.id)
-    yield put({ type: RECEIVE_TODO, payload: data.payload });
+    const todos = yield select(state => state.todos.todos)
+    const todo = todos.find(t => t.id === parseInt(action.id))
+    if (todo) {
+      yield put({ type: SET_ACTIVE_TODO, payload: { todo } });
+    } else {
+      const { data } = yield call(api.fetchTodo, action.id)
+      yield put({ type: SET_ACTIVE_TODO, payload: data.payload });
+    }
   } catch (err) {
     console.log(err)
     yield put({ type: RECEIVE_ERROR, error: err });

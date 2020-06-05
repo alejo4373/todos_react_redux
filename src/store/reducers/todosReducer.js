@@ -1,8 +1,16 @@
-import { RECEIVE_TODO, REMOVE_TODO, RECEIVE_TODOS, SET_TODOS_FILTER, UPDATE_TODO } from '../actionTypes/todos';
+import {
+  RECEIVE_TODO,
+  REMOVE_TODO,
+  RECEIVE_TODOS,
+  SET_TODOS_FILTER,
+  SET_ACTIVE_TODO,
+  UPDATE_TODO
+} from '../actionTypes/todos';
 
 const initialState = {
   todos: [],
-  filter: "all"
+  filter: "all",
+  activeTodo: null
 }
 
 const todosReducer = (state = initialState, { type, payload }) => {
@@ -12,6 +20,10 @@ const todosReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_TODOS_FILTER:
       newState.filter = filter
+      return newState;
+
+    case SET_ACTIVE_TODO:
+      newState.activeTodo = todo
       return newState;
 
     case RECEIVE_TODO:

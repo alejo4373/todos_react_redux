@@ -71,8 +71,7 @@ class TodosContainer extends Component {
   }
 
   renderTodoPage = (routeProps) => {
-    const { id } = routeProps.match.params
-    const todo = this.props.todos[id]
+    const todo = this.props.activeTodo
     return (
       <TodoPage
         {...routeProps}
@@ -94,17 +93,8 @@ class TodosContainer extends Component {
     )
   }
 }
-let prevTodos = undefined
-const mapStateToProps = ({ todos }) => {
-  console.log('mstp', todos)
-  if (prevTodos === todos) {
-    console.log('same todos', prevTodos, todos)
-  } else {
-    console.log('setting prev todos', todos)
-    prevTodos = todos
-  }
-  return todos
-}
+
+const mapStateToProps = ({ todos }) => todos
 
 const mapDispatchToProps = (dispatch) => {
   return {
