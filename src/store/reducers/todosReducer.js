@@ -40,7 +40,7 @@ const todosReducer = (state = initialState, { type, payload }) => {
 
     case UPDATE_TODO:
       // If todo being updated is the active todo (being rendered in TodoPage)
-      // set activeTodo as well
+      // set activeTodo to the updated todo
       const { activeTodo } = state
       if (activeTodo && todo.id === activeTodo.id) {
         newState.activeTodo = todo;
