@@ -33,13 +33,11 @@ class TodosContainer extends Component {
     this.props.setTodosFilter(id)
   }
 
-  handleToggleCompleted = (event) => {
-    const todoId = event.currentTarget.dataset.todo_id;
-    const todo = this.props.todos.find(t => t.id === parseInt(todoId))
+  toggleCompleted = (todo) => {
     const todoUpdates = {
       completed: !todo.completed
     }
-    this.props.updateTodo(todoId, todoUpdates);
+    this.props.updateTodo(todo.id, todoUpdates);
   }
 
   applyTodosFilter = (todos, filter) => {
@@ -61,7 +59,7 @@ class TodosContainer extends Component {
       <Todos
         todos={filteredTodos}
         deleteTodo={this.handleDeleteTodo}
-        toggleCompleted={this.handleToggleCompleted}
+        toggleCompleted={this.toggleCompleted}
         getAllTodos={this.getAllTodos}
         addTodo={this.props.addTodo}
         setTodosFilter={this.props.setTodosFilter}
@@ -77,7 +75,7 @@ class TodosContainer extends Component {
         {...routeProps}
         getTodo={this.getTodo}
         todo={todo}
-        toggleCompleted={this.handleToggleCompleted}
+        toggleCompleted={this.toggleCompleted}
       />
     )
   }

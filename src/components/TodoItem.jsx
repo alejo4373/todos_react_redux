@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 
 const TodoItem = (props) => {
   const { todo, deleteTodo, toggleCompleted } = props
+
+  const handleToggleCompleted = () => {
+    toggleCompleted(todo)
+  }
+
   return (
     <li className="todo-item">
       <input
         type="checkbox"
         checked={todo.completed}
-        onChange={toggleCompleted}
+        onChange={handleToggleCompleted}
         data-todo_id={todo.id}
       />
       <Link

@@ -6,8 +6,12 @@ class TodoPage extends Component {
     this.props.getTodo(id)
   }
 
+  handleToggleCompleted = (e) => {
+    this.props.toggleCompleted(this.props.todo)
+  }
+
   render() {
-    const { todo, toggleCompleted, deleteTodo } = this.props;
+    const { todo, deleteTodo } = this.props;
 
     if (!todo) {
       return <p>Todo not found....</p>
@@ -16,7 +20,7 @@ class TodoPage extends Component {
     return (
       <div>
         <div
-          onClick={toggleCompleted}
+          onClick={this.handleToggleCompleted}
           data-todo_id={todo.id}
           className={'todo-content ' + (todo.completed ? "completed" : "")}
         >
