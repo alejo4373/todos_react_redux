@@ -16,6 +16,7 @@ const initialState = {
 const todosReducer = (state = initialState, { type, payload }) => {
   const { todo, todos, filter } = payload || {};
   let newState = { ...state };
+  const { activeTodo } = newState
 
   switch (type) {
     case SET_TODOS_FILTER:
@@ -35,13 +36,16 @@ const todosReducer = (state = initialState, { type, payload }) => {
       return newState;
 
     case REMOVE_TODO:
+      if (activeTodo && todo.id === activeTodo.id) {
+        newState.activeTodo = null;
+      }
+
       newState.todos = newState.todos.filter(t => t.id !== todo.id);
       return newState;
 
     case UPDATE_TODO:
       // If todo being updated is the active todo (being rendered in TodoPage)
       // set activeTodo to the updated todo
-      const { activeTodo } = state
       if (activeTodo && todo.id === activeTodo.id) {
         newState.activeTodo = todo;
       }

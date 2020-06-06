@@ -16,8 +16,7 @@ import { Switch, Route } from 'react-router';
 class TodosContainer extends Component {
 
   /* Todo's Ops */
-  handleDeleteTodo = (event) => {
-    const todoId = event.target.id;
+  deleteTodo = (todoId) => {
     this.props.deleteTodo(todoId)
   }
 
@@ -62,7 +61,7 @@ class TodosContainer extends Component {
     return (
       <Todos
         todos={filteredTodos}
-        deleteTodo={this.handleDeleteTodo}
+        deleteTodo={this.deleteTodo}
         toggleCompleted={this.toggleCompleted}
         getAllTodos={this.getAllTodos}
         addTodo={this.props.addTodo}
@@ -81,6 +80,7 @@ class TodosContainer extends Component {
         todo={todo}
         toggleCompleted={this.toggleCompleted}
         updateTodo={this.updateTodo}
+        deleteTodo={this.deleteTodo}
       />
     )
   }

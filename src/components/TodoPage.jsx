@@ -7,9 +7,10 @@ class TodoPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.todo !== this.props.todo) {
+    const { todo } = this.props
+    if (todo && todo !== prevProps.todo) {
       this.setState({
-        text: this.props.todo.text
+        text: todo.text
       })
     }
   }
@@ -48,9 +49,16 @@ class TodoPage extends Component {
     })
   }
 
+  handleDeleteTodo = (e) => {
+    const todoId = e.target.id;
+    const { deleteTodo, history } = this.props
+    deleteTodo(todoId)
+    history.goBack()
+  }
+
   render() {
     const { editing, text } = this.state;
-    const { todo, deleteTodo } = this.props;
+    const { todo } = this.props;
 
     if (!todo) {
       return <p>Todo not found....</p>
@@ -69,7 +77,7 @@ class TodoPage extends Component {
               : (todo.text)
           }
         </div>
-        <button className="btn_remove" id={todo.id} onClick={deleteTodo}>X</button>
+        <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>X</button>
         {
           editing
             ? (<button className="btn" onClick={this.handleEditSave}>Save</button>)

@@ -8,6 +8,10 @@ const TodoItem = (props) => {
     toggleCompleted(todo)
   }
 
+  const handleDeleteTodo = (e) => {
+    deleteTodo(todo.id)
+  }
+
   return (
     <li className="todo-item">
       <input
@@ -23,7 +27,7 @@ const TodoItem = (props) => {
       >
         {todo.text}
       </Link>
-      <button className="btn_remove" id={todo.id} onClick={deleteTodo}>X</button>
+      <button className="btn_remove" id={todo.id} onClick={handleDeleteTodo}>X</button>
     </li>
   )
 }
