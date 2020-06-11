@@ -70,7 +70,7 @@ class TodoPage extends Component {
           data-todo_id={todo.id}
           className={'todo-content ' + (todo.completed ? "completed" : "")}
         >
-          <input type="checkbox" readOnly checked={todo.completed} />
+          <input type="checkbox" readOnly checked={todo.completed} onChange={this.handleToggleCompleted} />
           {
             editing
               ? (<input type="text" value={text} onChange={this.handleTodoText} />)
