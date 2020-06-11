@@ -1,5 +1,6 @@
 .todo-page .todo-text {
   display: inline-block;
+  text-decoration: inherit;
 }
 
 .todo-page .todo-text-input {

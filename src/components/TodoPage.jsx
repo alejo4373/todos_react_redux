@@ -41,11 +41,12 @@ class TodoPage extends Component {
 
   handleEditSave = () => {
     const { todo, updateTodo } = this.props
-    const todoUpdates = {
-      text: this.state.text
+    if (todo.text !== this.state.text) {
+      const todoUpdates = {
+        text: this.state.text
+      }
+      updateTodo(todo.id, todoUpdates)
     }
-
-    updateTodo(todo.id, todoUpdates)
 
     this.setState({
       editing: false
@@ -92,7 +93,14 @@ class TodoPage extends Component {
                   ref={this.todoInputRef}
                 />
               )
-              : <p className="todo-text" onClick={this.handleEditButton}>{todo.text}</p>
+              : <p
+                tabIndex="0"
+                className="todo-text"
+                onClick={this.handleEditButton}
+                onFocus={this.handleEditButton}
+              >
+                {todo.text}
+              </p>
           }
         </div>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
