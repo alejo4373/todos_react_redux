@@ -1,0 +1,7 @@
+.todo-page .todo-text {
+  display: inline-block;
+}
+
+.todo-page .todo-text-input {
+  margin: 16px 0;
+}

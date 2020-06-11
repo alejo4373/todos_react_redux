@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import "../styles/TodoPage.css"
 
 class TodoPage extends Component {
+  todoInputRef = React.createRef()
   state = {
     text: '',
-    editing: false
+    editing: false,
   }
+
 
   componentDidUpdate(prevProps) {
     const { todo } = this.props
@@ -27,6 +30,12 @@ class TodoPage extends Component {
   handleEditButton = () => {
     this.setState({
       editing: true
+    }, () => this.todoInputRef.current.focus())
+  }
+
+  handleEditCancel = () => {
+    this.setState({
+      editing: false
     })
   }
 
@@ -65,7 +74,7 @@ class TodoPage extends Component {
     }
 
     return (
-      <div>
+      <div className="todo-page">
         <div
           data-todo_id={todo.id}
           className={'todo-content ' + (todo.completed ? "completed" : "")}
@@ -73,14 +82,28 @@ class TodoPage extends Component {
           <input type="checkbox" readOnly checked={todo.completed} onChange={this.handleToggleCompleted} />
           {
             editing
-              ? (<input type="text" value={text} onChange={this.handleTodoText} />)
-              : (todo.text)
+              ? (
+                <input
+                  type="text"
+                  className="todo-text-input"
+                  value={text}
+                  onChange={this.handleTodoText}
+                  onBlur={this.handleEditSave}
+                  ref={this.todoInputRef}
+                />
+              )
+              : <p className="todo-text" onClick={this.handleEditButton}>{todo.text}</p>
           }
         </div>
-        <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>X</button>
+        <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
         {
           editing
-            ? (<button className="btn" onClick={this.handleEditSave}>Save</button>)
+            ? (
+              <>
+                <button className="btn" onClick={this.handleEditSave}>Save</button>
+                <button className="btn" onClick={this.handleEditCancel}>Cancel</button>
+              </>
+            )
             : (<button className="btn" onClick={this.handleEditButton}>Edit</button>)
         }
       </div>
