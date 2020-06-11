@@ -27,19 +27,16 @@ class TodoPage extends Component {
     this.props.toggleCompleted(this.props.todo)
   }
 
-  handleEditButton = () => {
+  handleEditClick = () => {
+    console.log('handleEditClick =>')
     this.setState({
       editing: true
     }, () => this.todoInputRef.current.focus())
   }
 
-  handleEditCancel = () => {
-    this.setState({
-      editing: false
-    })
-  }
-
-  handleEditSave = () => {
+  handleEditSave = (e) => {
+    e.preventDefault()
+    console.log('handleEditSave =>')
     const { todo, updateTodo } = this.props
     if (todo.text !== this.state.text) {
       const todoUpdates = {
@@ -60,6 +57,7 @@ class TodoPage extends Component {
   }
 
   handleDeleteTodo = (e) => {
+    console.log('deleting todo =>')
     const todoId = e.target.id;
     const { deleteTodo, history } = this.props
     deleteTodo(todoId)
@@ -76,9 +74,10 @@ class TodoPage extends Component {
 
     return (
       <div className="todo-page">
-        <div
+        <form
           data-todo_id={todo.id}
           className={'todo-content ' + (todo.completed ? "completed" : "")}
+          onSubmit={this.handleEditSave}
         >
           <input type="checkbox" readOnly checked={todo.completed} onChange={this.handleToggleCompleted} />
           {
@@ -96,24 +95,14 @@ class TodoPage extends Component {
               : <p
                 tabIndex="0"
                 className="todo-text"
-                onClick={this.handleEditButton}
-                onFocus={this.handleEditButton}
+                onClick={this.handleEditClick}
+                onFocus={this.handleEditClick}
               >
                 {todo.text}
               </p>
           }
-        </div>
+        </form>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
-        {
-          editing
-            ? (
-              <>
-                <button className="btn" onClick={this.handleEditSave}>Save</button>
-                <button className="btn" onClick={this.handleEditCancel}>Cancel</button>
-              </>
-            )
-            : (<button className="btn" onClick={this.handleEditButton}>Edit</button>)
-        }
       </div>
     )
   }
