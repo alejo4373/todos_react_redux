@@ -28,6 +28,10 @@ class JournalContainer extends Component {
       }
 
       this.props.addJournalEntry(journalEntry);
+      this.setState({
+        text: '',
+        tags: ''
+      })
     }
   }
 
