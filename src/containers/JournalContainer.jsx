@@ -41,7 +41,7 @@ class JournalContainer extends Component {
 
   render() {
     const { text, tags } = this.state;
-    const { journal } = this.props;
+    const { entries } = this.props;
 
     return (
       <div className="journal-container">
@@ -52,13 +52,13 @@ class JournalContainer extends Component {
           entryText={text}
           entryTags={tags}
         />
-        <JournalEntriesList entries={journal} />
+        <JournalEntriesList entries={entries} />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ journal }) => ({ journal })
+const mapStateToProps = ({ journal }) => ({ entries: journal.entries })
 
 const mapDispatchToProps = (dispatch) => {
   return {

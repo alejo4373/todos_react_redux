@@ -4,12 +4,11 @@ import JournalEntry from './JournalEntry';
 const JournalEntriesList = ({ entries }) => {
   const entriesList = [];
 
-  // debugger
-  for (let entry in entries) {
+  for (let entry of entries) {
     entriesList.push(
       <JournalEntry
-        key={entries[entry].id}
-        entry={entries[entry]}
+        key={entry.id}
+        entry={entry}
       />
     )
   }
