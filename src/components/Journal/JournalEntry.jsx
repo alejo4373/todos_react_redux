@@ -5,6 +5,7 @@ const JournalEntry = ({ entry }) => {
     <li className="je-entry-item">
       <div>
         {new Date(entry.ts).toLocaleString()} {entry.text}
+        <p>Tags: {entry.tags.join(', ')}</p>
       </div>
     </li>
   )

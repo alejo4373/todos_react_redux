@@ -9,7 +9,7 @@ class JournalContainer extends Component {
     super(props);
     this.state = {
       text: '',
-      tag_ids: [],
+      tag: "",
     }
   }
 
@@ -19,12 +19,12 @@ class JournalContainer extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { text, tag_ids } = this.state;
+    const { text, tags } = this.state;
 
-    if (text && tag_ids.length) {
+    if (text && tags.length) {
       const journalEntry = {
         text: text.trim(),
-        tag_ids: tag_ids.split(' ') // Temporary while we implement tag selection
+        tags: tags.split(',').map(t => t.trim()) // Temporary while I implement tag suggestions
       }
 
       this.props.addJournalEntry(journalEntry);
@@ -40,7 +40,7 @@ class JournalContainer extends Component {
   }
 
   render() {
-    const { text, tag_ids } = this.state;
+    const { text, tags } = this.state;
     const { journal } = this.props;
 
     return (
@@ -50,7 +50,7 @@ class JournalContainer extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           entryText={text}
-          entryTags={tag_ids}
+          entryTags={tags}
         />
         <JournalEntriesList entries={journal} />
       </div>

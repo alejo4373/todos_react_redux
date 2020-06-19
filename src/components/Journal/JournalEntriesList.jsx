@@ -4,6 +4,7 @@ import JournalEntry from './JournalEntry';
 const JournalEntriesList = ({ entries }) => {
   const entriesList = [];
 
+  // debugger
   for (let entry in entries) {
     entriesList.push(
       <JournalEntry

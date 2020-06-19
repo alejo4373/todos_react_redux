@@ -21,10 +21,10 @@ const JournalForm = (props) => {
       >
       </textarea>
       <input
-        name='tag_ids'
+        name='tags'
         onChange={handleChange}
         value={entryTags}
-        placeholder={'Tag ids'}
+        placeholder={'Tags'}
         type="text"
         required
       />
