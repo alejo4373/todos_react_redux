@@ -14,9 +14,12 @@ const JournalEntriesList = ({ entries }) => {
   }
 
   return (
-    <ul>
-      {entriesList}
-    </ul>
+    <div>
+      <h3>Entries</h3>
+      <ul>
+        {entriesList}
+      </ul>
+    </div>
   )
 }
 

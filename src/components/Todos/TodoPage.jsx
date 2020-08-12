@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "../styles/TodoPage.css"
+import "../../styles/TodoPage.css"
 
 class TodoPage extends Component {
   todoInputRef = React.createRef()
@@ -7,7 +7,6 @@ class TodoPage extends Component {
     text: '',
     editing: false,
   }
-
 
   componentDidUpdate(prevProps) {
     const { todo } = this.props

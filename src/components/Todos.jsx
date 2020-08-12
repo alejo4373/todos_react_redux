@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TodoForm from '../components/TodoForm';
-import TodoItem from './TodoItem';
+import TodoForm from './Todos/TodoForm';
 import TodosFilter from './Todos/TodosFilter';
+import TodosList from './Todos/TodosList';
 
 class Todos extends Component {
   state = {
@@ -60,16 +60,14 @@ class Todos extends Component {
         />
         <hr />
         <TodosFilter handleFilterChange={this.handleFilterChange} filterValue={filterValue} />
-        <ul>{
-          todos.map(todo => (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              deleteTodo={deleteTodo}
-              toggleCompleted={toggleCompleted}
-            />
-          ))
-        }</ul>
+        <TodosList
+          title="Todos"
+          todos={todos}
+          handlers={{
+            deleteTodo,
+            toggleCompleted
+          }}
+        />
       </div>
     )
   }

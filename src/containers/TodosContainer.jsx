@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
-import TodoPage from '../components/TodoPage';
+import TodoPage from '../components/Todos/TodoPage';
 import {
   REQUEST_ADD_TODO,
   REQUEST_FETCH_TODOS,

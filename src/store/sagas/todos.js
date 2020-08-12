@@ -36,7 +36,7 @@ function* updateTodo(action) {
 
 function* fetchTodos(action) {
   try {
-    const { data } = yield call(api.fetchTodos, action.todo)
+    const { data } = yield call(api.fetchTodos, action.payload)
     yield put({ type: RECEIVE_TODOS, payload: data.payload });
   } catch (err) {
     console.log(err)

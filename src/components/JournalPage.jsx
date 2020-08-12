@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { JournalForm, JournalEntriesList } from './Journal'
 import { Redirect } from 'react-router';
+import TodosList from './Todos/TodosList';
 
 class JournalPage extends Component {
   constructor(props) {
@@ -42,20 +43,21 @@ class JournalPage extends Component {
     if (date === "today") {
       let today = (new Date()).toISOString().split('T')[0]
       this.props.fetchJournalEntries(today)
+      this.props.fetchTodos({ completed_at: today })
     } else {
       this.props.fetchJournalEntries(date)
+      this.props.fetchTodos({ completed_at: date })
     }
   }
 
   render() {
-    const { entries, match: { params } } = this.props;
+    const { entries, todos, match: { params } } = this.props;
     const { text, tags } = this.state;
 
     const [year, month, day] = params.date.split('-')
     let date = new Date(year, parseInt(month) - 1, day)
     let dateStr;
 
-    debugger;
     if (params.date === 'today') {
       dateStr = `Today ${(new Date()).toDateString()}`
     } else if (!isNaN(date.getTime())) {
@@ -74,6 +76,7 @@ class JournalPage extends Component {
           entryTags={tags}
         />
         <JournalEntriesList entries={entries} />
+        <TodosList todos={todos} title="Todos Completed" minimal />
       </>
     )
   }

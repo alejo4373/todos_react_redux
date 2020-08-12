@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "../styles/Journal.css"
 import { REQUEST_ADD_JOURNAL_ENTRY, REQUEST_JOURNAL_ENTRIES } from '../store/actionTypes/journal';
+import { REQUEST_FETCH_TODOS } from '../store/actionTypes/todos';
 import { Route, Switch, Redirect } from 'react-router';
 import JournalPage from '../components/JournalPage';
 
@@ -12,8 +13,10 @@ class JournalContainer extends Component {
       <JournalPage
         {...props}
         entries={this.props.entries}
+        todos={this.props.todos}
         addJournalEntry={this.props.addJournalEntry}
         fetchJournalEntries={this.props.fetchJournalEntries}
+        fetchTodos={this.props.fetchTodos}
       />
     )
   }
@@ -33,7 +36,10 @@ class JournalContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ journal }) => ({ entries: journal.entries })
+const mapStateToProps = ({ journal, todos }) => ({
+  entries: journal.entries,
+  todos: todos.todos
+})
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -43,6 +49,10 @@ const mapDispatchToProps = (dispatch) => {
     fetchJournalEntries: (date) => dispatch({
       type: REQUEST_JOURNAL_ENTRIES,
       payload: { date }
+    }),
+    fetchTodos: (params) => dispatch({
+      type: REQUEST_FETCH_TODOS,
+      payload: params
     })
   }
 }
