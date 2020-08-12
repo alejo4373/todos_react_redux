@@ -2,61 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "../styles/Journal.css"
 import { REQUEST_ADD_JOURNAL_ENTRY, REQUEST_JOURNAL_ENTRIES } from '../store/actionTypes/journal';
-import { JournalForm, JournalEntriesList } from '../components/Journal';
+import { Route, Switch, Redirect } from 'react-router';
+import JournalPage from '../components/JournalPage';
 
+// JournalContainer mainly provides the sub routes for /journal
 class JournalContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-      tag: "",
-    }
-  }
-
-  componentDidMount = () => {
-    this.props.fetchJournalEntries();
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const { text, tags } = this.state;
-
-    if (text && tags.length) {
-      const journalEntry = {
-        text: text.trim(),
-        tags: tags.split(',').map(t => t.trim()) // Temporary while I implement tag suggestions
-      }
-
-      this.props.addJournalEntry(journalEntry);
-      this.setState({
-        text: '',
-        tags: ''
-      })
-    }
-  }
-
-  handleChange = (event) => {
-    const { name, value } = event.target
-
-    this.setState({
-      [name]: value
-    })
+  renderJournalPage = (props) => {
+    return (
+      <JournalPage
+        {...props}
+        entries={this.props.entries}
+        addJournalEntry={this.props.addJournalEntry}
+        fetchJournalEntries={this.props.fetchJournalEntries}
+      />
+    )
   }
 
   render() {
-    const { text, tags } = this.state;
-    const { entries } = this.props;
-
+    const { match } = this.props
     return (
       <div className="journal-container">
-        <h2>Journal </h2>
-        <JournalForm
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          entryText={text}
-          entryTags={tags}
-        />
-        <JournalEntriesList entries={entries} />
+        <Switch>
+          <Route path={`${match.path}/:date`} render={this.renderJournalPage} />
+          {/* TODO <Route path={`${match.path}/calendar`} /> */}
+          {/* TODO <Route path={`${match.path}/search`} /> */}
+          <Redirect to={`${match.path}/today`} />
+        </Switch>
       </div>
     )
   }
@@ -69,7 +40,10 @@ const mapDispatchToProps = (dispatch) => {
     addJournalEntry: (journalEntry) => dispatch({
       type: REQUEST_ADD_JOURNAL_ENTRY, journalEntry
     }),
-    fetchJournalEntries: () => dispatch({ type: REQUEST_JOURNAL_ENTRIES })
+    fetchJournalEntries: (date) => dispatch({
+      type: REQUEST_JOURNAL_ENTRIES,
+      payload: { date }
+    })
   }
 }
 

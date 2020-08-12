@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import * as api from '../../api';
 import { RECEIVE_ERROR } from '../actionTypes/comm';
-import { 
+import {
   RECEIVE_JOURNAL_ENTRY,
   RECEIVE_JOURNAL_ENTRIES,
 
@@ -12,30 +12,30 @@ import {
 function* addJournalEntry(action) {
   try {
     const { data } = yield call(api.addJournalEntry, action.journalEntry)
-    yield put({ 
+    yield put({
       type: RECEIVE_JOURNAL_ENTRY,
       payload: { journalEntry: data.payload }
     });
   } catch (err) {
     yield put({ type: RECEIVE_ERROR, error: action.error });
   }
- }
+}
 
 function* fetchJournalEntries(action) {
   try {
-    const { data } = yield call(api.fetchJournalEntries)
-    yield put({ 
+    const { data } = yield call(api.fetchJournalEntries, action.payload)
+    yield put({
       type: RECEIVE_JOURNAL_ENTRIES,
       payload: { entries: data.payload }
     });
   } catch (err) {
     yield put({ type: RECEIVE_ERROR, error: action.error });
   }
- }
+}
 
- function* journalSagasWatcher() {
-   yield takeEvery(REQUEST_ADD_JOURNAL_ENTRY, addJournalEntry)
-   yield takeEvery(REQUEST_JOURNAL_ENTRIES, fetchJournalEntries) //Can the watcher do this? watch multiple sagas?
- }
+function* journalSagasWatcher() {
+  yield takeEvery(REQUEST_ADD_JOURNAL_ENTRY, addJournalEntry)
+  yield takeEvery(REQUEST_JOURNAL_ENTRIES, fetchJournalEntries) //Can the watcher do this? watch multiple sagas?
+}
 
- export default journalSagasWatcher;
+export default journalSagasWatcher;
