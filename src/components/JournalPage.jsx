@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { JournalForm, JournalEntriesList } from './Journal'
 import { Redirect } from 'react-router';
 import TodosList from './Todos/TodosList';
+import "../styles/Journal.css"
+import { REQUEST_ADD_JOURNAL_ENTRY, REQUEST_JOURNAL_ENTRIES } from '../store/actionTypes/journal';
+import { REQUEST_FETCH_TODOS } from '../store/actionTypes/todos';
 
 class JournalPage extends Component {
   constructor(props) {
@@ -67,7 +71,7 @@ class JournalPage extends Component {
     }
 
     return (
-      <>
+      <div className="journal-page">
         <h2>{dateStr}</h2>
         <JournalForm
           handleChange={this.handleChange}
@@ -77,9 +81,30 @@ class JournalPage extends Component {
         />
         <JournalEntriesList entries={entries} />
         <TodosList todos={todos} title="Todos Completed" minimal />
-      </>
+      </div>
     )
   }
 }
 
-export default JournalPage
+const mapStateToProps = ({ journal, todos }) => ({
+  entries: journal.entries,
+  todos: todos.todos
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addJournalEntry: (journalEntry) => dispatch({
+      type: REQUEST_ADD_JOURNAL_ENTRY, journalEntry
+    }),
+    fetchJournalEntries: (date) => dispatch({
+      type: REQUEST_JOURNAL_ENTRIES,
+      payload: { date }
+    }),
+    fetchTodos: (params) => dispatch({
+      type: REQUEST_FETCH_TODOS,
+      payload: params
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(JournalPage);

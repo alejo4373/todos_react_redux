@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import TodosContainer from './TodosContainer';
-import JournalContainer from './JournalContainer';
+import JournalRouter from '../routers/JournalRouter';
 import ProfileContainer from './ProfileContainer';
 
 class Private extends Component {
@@ -23,7 +23,7 @@ class Private extends Component {
         </nav>
         <Switch>
           <Route path='/todos' component={TodosContainer} />
-          <Route path='/journal' component={JournalContainer} />
+          <Route path='/journal' component={JournalRouter} />
           <Route path='/profile' component={ProfileContainer} />
         </Switch>
       </div>

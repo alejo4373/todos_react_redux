@@ -1,8 +1,4 @@
-.journal-container {
-  /* border: 2px solid red; */
-}
-
-.journal-container form textarea {
+.journal-page form textarea {
   box-sizing: border-box;
   resize: vertical;
   width: 100%;
