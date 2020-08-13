@@ -9,7 +9,8 @@ import {
   REQUEST_FETCH_TODO,
   REQUEST_UPDATE_TODO,
   REQUEST_DELETE_TODO,
-  SET_TODOS_FILTER
+  SET_TODOS_FILTER,
+  REQUEST_TOGGLE_TODO_COMPLETED
 } from '../store/actionTypes/todos';
 import { Switch, Route } from 'react-router';
 
@@ -32,11 +33,8 @@ class TodosContainer extends Component {
     this.props.setTodosFilter(id)
   }
 
-  toggleCompleted = (todo) => {
-    const todoUpdates = {
-      completed: !todo.completed
-    }
-    this.props.updateTodo(todo.id, todoUpdates);
+  toggleCompleted = (id) => {
+    this.props.toggleTodoCompleted(id);
   }
 
   updateTodo = (todoId, updates) => {
@@ -107,6 +105,10 @@ const mapDispatchToProps = (dispatch) => {
     updateTodo: (id, todoUpdates) => dispatch({
       type: REQUEST_UPDATE_TODO,
       payload: { id, todoUpdates }
+    }),
+    toggleTodoCompleted: (id) => dispatch({
+      type: REQUEST_TOGGLE_TODO_COMPLETED,
+      payload: { id }
     }),
     deleteTodo: (id) => dispatch({
       type: REQUEST_DELETE_TODO,

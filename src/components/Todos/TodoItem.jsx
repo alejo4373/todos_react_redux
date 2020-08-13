@@ -5,7 +5,8 @@ const TodoItem = (props) => {
   const { todo, deleteTodo, toggleCompleted } = props
 
   const handleToggleCompleted = () => {
-    toggleCompleted(todo)
+    debugger;
+    toggleCompleted(todo.id)
   }
 
   const handleDeleteTodo = (e) => {

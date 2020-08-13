@@ -23,7 +23,7 @@ class TodoPage extends Component {
   }
 
   handleToggleCompleted = (e) => {
-    this.props.toggleCompleted(this.props.todo)
+    this.props.toggleCompleted(this.props.todo.id)
   }
 
   handleEditClick = () => {
