@@ -8,16 +8,16 @@ const TodosList = ({ todos, title, minimal, handlers }) => {
     <div>
       <h3>{title}</h3>
       <ul>{
-        todos.map(todo => (
-          <TodoComponent
-            key={todo.id}
-            todo={todo}
-            {...handlers}
-          />
-        )
-        )
+        todos.length
+          ? (todos.map(todo => (
+            <TodoComponent
+              key={todo.id}
+              todo={todo}
+              {...handlers}
+            />
+          )))
+          : (<li>No Todos</li>)
       }</ul>
-
     </div>
   )
 }
