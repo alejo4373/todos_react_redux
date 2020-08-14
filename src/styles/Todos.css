@@ -33,12 +33,3 @@
   display: flex;
   width: 100%;
 }
-
-.todos-container .todo-item > .btn_remove {
-  display: none;
-  align-self: start;
-}
-
-.todos-container .todo-item:hover > .btn_remove {
-  display: unset;
-}

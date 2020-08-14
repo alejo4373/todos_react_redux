@@ -48,7 +48,7 @@ class Todos extends Component {
   }
 
   render() {
-    const { todos, deleteTodo, toggleCompleted, filterValue } = this.props;
+    const { todos, toggleCompleted, filterValue } = this.props;
     return (
       <div className='todos-container'>
         <h2>Todos</h2>
@@ -64,7 +64,6 @@ class Todos extends Component {
           title="Todos"
           todos={todos}
           handlers={{
-            deleteTodo,
             toggleCompleted
           }}
         />

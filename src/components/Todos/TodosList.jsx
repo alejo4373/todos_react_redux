@@ -16,7 +16,7 @@ const TodosList = ({ todos, title, minimal, handlers }) => {
               {...handlers}
             />
           )))
-          : (<li>No Todos</li>)
+          : (<li>None</li>)
       }</ul>
     </div>
   )
