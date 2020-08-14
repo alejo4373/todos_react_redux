@@ -42,10 +42,21 @@ class JournalPage extends Component {
     })
   }
 
+  getTodaysDateString = () => {
+    const padDayOrMonth = (number) => (number < 10) ? "0" + number : number
+
+    const todaysDate = new Date()
+    const year = todaysDate.getFullYear()
+    const month = padDayOrMonth(todaysDate.getMonth() + 1)
+    const day = padDayOrMonth(todaysDate.getDate())
+
+    return `${year}-${month}-${day}`
+  }
+
   componentDidMount = () => {
     let { date } = this.props.match.params
     if (date === "today") {
-      let today = (new Date()).toISOString().split('T')[0]
+      let today = this.getTodaysDateString()
       this.props.fetchJournalEntries(today)
       this.props.fetchTodos({ completed_at: today })
     } else {
