@@ -1,9 +1,15 @@
+const padNumber = (number) => (number < 10) ? "0" + number : number
+
 export const getDateString = (date) => {
-  const padDayOrMonth = (number) => (number < 10) ? "0" + number : number
+  const YYYY = date.getFullYear()
+  const MM = padNumber(date.getMonth() + 1)
+  const DD = padNumber(date.getDate())
 
-  const year = date.getFullYear()
-  const month = padDayOrMonth(date.getMonth() + 1)
-  const day = padDayOrMonth(date.getDate())
+  return `${YYYY}-${MM}-${DD}`
+}
 
-  return `${year}-${month}-${day}`
+export const get24HourTimeString = (date) => {
+  const HH = padNumber(date.getHours())
+  const MM = padNumber(date.getMinutes())
+  return `${HH}:${MM}`
 }

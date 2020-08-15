@@ -1,12 +1,19 @@
 import React from 'react';
+import { get24HourTimeString } from '../../util';
 
 const JournalEntry = ({ entry }) => {
+  const date = new Date(entry.ts)
+  const time = get24HourTimeString(date)
+  console.log(time)
+
   return (
-    <li className="je-entry-item">
-      <div>
-        {new Date(entry.ts).toLocaleString()} {entry.text}
-        <p>Tags: {entry.tags.join(', ')}</p>
-      </div>
+    <li className="entry">
+      <span className="entry__date tooltip">
+        {time}
+        <span className="tooltip__text">{date.toLocaleString()}</span>
+      </span>
+      <p>{entry.text} </p>
+      <p>🏷 {entry.tags.join(', ')}</p>
     </li>
   )
 }

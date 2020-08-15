@@ -16,7 +16,7 @@ const JournalEntriesList = ({ entries }) => {
   return (
     <div>
       <h3>Entries</h3>
-      <ul>
+      <ul className="list">
         {entriesList}
       </ul>
     </div>
