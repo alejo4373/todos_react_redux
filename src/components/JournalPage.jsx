@@ -6,6 +6,7 @@ import TodosList from './Todos/TodosList';
 import "../styles/Journal.css"
 import { REQUEST_ADD_JOURNAL_ENTRY, REQUEST_JOURNAL_ENTRIES } from '../store/actionTypes/journal';
 import { REQUEST_FETCH_TODOS } from '../store/actionTypes/todos';
+import { getDateString } from '../util';
 
 class JournalPage extends Component {
   constructor(props) {
@@ -42,21 +43,10 @@ class JournalPage extends Component {
     })
   }
 
-  getTodaysDateString = () => {
-    const padDayOrMonth = (number) => (number < 10) ? "0" + number : number
-
-    const todaysDate = new Date()
-    const year = todaysDate.getFullYear()
-    const month = padDayOrMonth(todaysDate.getMonth() + 1)
-    const day = padDayOrMonth(todaysDate.getDate())
-
-    return `${year}-${month}-${day}`
-  }
-
   componentDidMount = () => {
     let { date } = this.props.match.params
     if (date === "today") {
-      let today = this.getTodaysDateString()
+      let today = getDateString(new Date())
       this.props.fetchJournalEntries(today)
       this.props.fetchTodos({ completed_at: today })
     } else {
