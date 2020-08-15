@@ -12,7 +12,7 @@ import {
   SET_TODOS_FILTER,
   REQUEST_TOGGLE_TODO_COMPLETED
 } from '../store/actionTypes/todos';
-import { Switch, Route } from 'react-router';
+import { Switch, Route } from 'react-router-dom';
 
 class TodosContainer extends Component {
 
