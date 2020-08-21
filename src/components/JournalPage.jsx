@@ -45,13 +45,21 @@ class JournalPage extends Component {
 
   componentDidMount = () => {
     let { date } = this.props.match.params
+    let client_tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+
     if (date === "today") {
       let today = getDateString(new Date())
-      this.props.fetchJournalEntries(today)
-      this.props.fetchTodos({ completed_at: today })
+      this.props.fetchJournalEntries(today, client_tz)
+      this.props.fetchTodos({
+        completed_at: today,
+        client_tz
+      })
     } else {
-      this.props.fetchJournalEntries(date)
-      this.props.fetchTodos({ completed_at: date })
+      this.props.fetchJournalEntries(date, client_tz)
+      this.props.fetchTodos({
+        completed_at: date,
+        client_tz
+      })
     }
   }
 
@@ -97,9 +105,9 @@ const mapDispatchToProps = (dispatch) => {
     addJournalEntry: (journalEntry) => dispatch({
       type: REQUEST_ADD_JOURNAL_ENTRY, journalEntry
     }),
-    fetchJournalEntries: (date) => dispatch({
+    fetchJournalEntries: (date, client_tz) => dispatch({
       type: REQUEST_JOURNAL_ENTRIES,
-      payload: { date }
+      payload: { date, client_tz }
     }),
     fetchTodos: (params) => dispatch({
       type: REQUEST_FETCH_TODOS,
