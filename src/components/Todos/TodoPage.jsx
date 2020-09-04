@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "../../styles/TodoPage.css"
+import TextareaAutoGrow from './TextareaAutoGrow';
 
 class TodoPage extends Component {
   todoInputRef = React.createRef()
@@ -26,15 +27,7 @@ class TodoPage extends Component {
     this.props.toggleCompleted(this.props.todo.id)
   }
 
-  handleEditClick = () => {
-    console.log('handleEditClick =>')
-    this.setState({
-      editing: true
-    }, () => this.todoInputRef.current.focus())
-  }
-
-  handleEditSave = (e) => {
-    e.preventDefault()
+  handleEditSave = () => {
     console.log('handleEditSave =>')
     const { todo, updateTodo } = this.props
     if (todo.text !== this.state.text) {
@@ -43,15 +36,12 @@ class TodoPage extends Component {
       }
       updateTodo(todo.id, todoUpdates)
     }
-
-    this.setState({
-      editing: false
-    })
   }
 
   handleTodoText = (e) => {
+    const { value } = e.target
     this.setState({
-      text: e.target.value
+      text: value
     })
   }
 
@@ -64,7 +54,7 @@ class TodoPage extends Component {
   }
 
   render() {
-    const { editing, text } = this.state;
+    const { editing, text, textboxHeight, textboxWidth } = this.state;
     const { todo } = this.props;
 
     if (!todo) {
@@ -79,27 +69,10 @@ class TodoPage extends Component {
           onSubmit={this.handleEditSave}
         >
           <input type="checkbox" readOnly checked={todo.completed} onChange={this.handleToggleCompleted} />
-          {
-            editing
-              ? (
-                <input
-                  type="text"
-                  className="todo-text-input"
-                  value={text}
-                  onChange={this.handleTodoText}
-                  onBlur={this.handleEditSave}
-                  ref={this.todoInputRef}
-                />
-              )
-              : <p
-                tabIndex="0"
-                className="todo-text"
-                onClick={this.handleEditClick}
-                onFocus={this.handleEditClick}
-              >
-                {todo.text}
-              </p>
-          }
+          <TextareaAutoGrow
+            value={text}
+            onChange={this.handleTodoText}
+          />
         </form>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
       </div>

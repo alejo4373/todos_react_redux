@@ -1,0 +1,6 @@
+.textarea-auto-grow {
+  width: 100%;
+  font: inherit;
+  padding: 5px;
+  resize: vertical;
+}

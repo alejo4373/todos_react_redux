@@ -1,25 +1,18 @@
 import React from 'react';
+import TextareaAutoGrow from '../Todos/TextareaAutoGrow';
 
 const JournalForm = (props) => {
   const { handleChange, handleSubmit, entryText, entryTags } = props
 
-  const handleTextarea = (e) => {
-    e.target.style.height = "6em"
-    e.target.style.height = `${e.target.scrollHeight}px`
-    handleChange(e)
-  }
-
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
+      <TextareaAutoGrow
         name='text'
-        onChange={handleTextarea}
+        onChange={handleChange}
         value={entryText}
         placeholder={'Type a journal entry'}
-        type="text"
         required
-      >
-      </textarea>
+      />
       <input
         name='tags'
         onChange={handleChange}

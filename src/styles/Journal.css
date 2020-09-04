@@ -1,10 +1,3 @@
-.journal-page form textarea {
-  box-sizing: border-box;
-  resize: vertical;
-  width: 100%;
-  height: 6em;
-}
-
 .list {
   list-style: none;
   padding-inline-start: 0;
