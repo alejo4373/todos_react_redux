@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import "../../styles/TodoPage.css"
 import TextareaAutoGrow from './TextareaAutoGrow';
+import withPreviewClickToEdit from './withPreviewClickToEdit';
+
+const TextareaAutoGrowWithPreview = withPreviewClickToEdit(TextareaAutoGrow)
 
 class TodoPage extends Component {
   todoInputRef = React.createRef()
@@ -69,7 +72,7 @@ class TodoPage extends Component {
           onSubmit={this.handleEditSave}
         >
           <input type="checkbox" readOnly checked={todo.completed} onChange={this.handleToggleCompleted} />
-          <TextareaAutoGrow
+          <TextareaAutoGrowWithPreview
             value={text}
             onChange={this.handleTodoText}
           />

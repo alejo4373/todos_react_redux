@@ -17,6 +17,11 @@ const TextareaAutoGrow = ({ onChange, value, ...rest }) => {
     }
   })
 
+  // Focus input on mount
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
+
   let styles = {
     height: height + "px",
   }
