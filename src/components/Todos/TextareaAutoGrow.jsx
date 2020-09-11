@@ -23,7 +23,11 @@ const TextareaAutoGrow = ({ onChange, value, ...rest }) => {
   }, [])
 
   let styles = {
-    height: height + "px",
+    height: height + "px"
+  }
+
+  if (!value) {
+    delete styles.height // Reset height when input is empty
   }
 
   return (
