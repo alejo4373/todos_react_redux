@@ -18,7 +18,6 @@ class AuthContainer extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const formName = e.target.name
-    console.log('submitting', formName)
     if (formName === "signup") {
       this.props.signupUser(this.state)
     } else {

@@ -31,7 +31,6 @@ class TodoPage extends Component {
   }
 
   handleEditSave = () => {
-    console.log('handleEditSave =>')
     const { todo, updateTodo } = this.props
     if (todo.text !== this.state.text) {
       const todoUpdates = {
@@ -49,7 +48,6 @@ class TodoPage extends Component {
   }
 
   handleDeleteTodo = (e) => {
-    console.log('deleting todo =>')
     const todoId = e.target.id;
     const { deleteTodo, history } = this.props
     deleteTodo(todoId)
@@ -57,7 +55,7 @@ class TodoPage extends Component {
   }
 
   render() {
-    const { editing, text, textboxHeight, textboxWidth } = this.state;
+    const { text } = this.state;
     const { todo } = this.props;
 
     if (!todo) {

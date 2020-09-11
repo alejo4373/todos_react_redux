@@ -4,7 +4,6 @@ import { get24HourTimeString } from '../../util';
 const JournalEntry = ({ entry }) => {
   const date = new Date(entry.ts)
   const time = get24HourTimeString(date)
-  console.log(time)
 
   return (
     <li className="entry">

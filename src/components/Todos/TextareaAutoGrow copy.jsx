@@ -52,7 +52,6 @@ const TextareaAutoGrow = ({ onChange, onSave, value }) => {
     width: width + "px"
   }
 
-  console.log('actual =>', height)
   return (
     <>
       <textarea

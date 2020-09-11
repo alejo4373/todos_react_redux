@@ -85,7 +85,6 @@ class TodosContainer extends Component {
 
   render() {
     const { path } = this.props.match
-    console.log('rendering =>', this.props.todos)
     return (
       <Switch>
         <Route path={`${path}/:id`} render={this.renderTodoPage} />

@@ -20,7 +20,6 @@ function* loginUser(action) {
       payload: { username: data.payload.user.username }
     });
   } catch (err) {
-    console.log(err)
     yield put({ type: RECEIVE_AUTH_ERROR, error: action.error })
   }
 }
