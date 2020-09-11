@@ -2,23 +2,23 @@ import React, { useState } from 'react'
 
 const withPreviewClickToEdit = (WrappedInput) => {
   return (props) => {
-    const [isEditting, setIsEditting] = useState(false)
+    const [isediting, setIsediting] = useState(false)
 
-    const startEditting = () => {
-      setIsEditting(true)
+    const startediting = () => {
+      setIsediting(true)
     }
 
     const stopEdditing = () => {
-      setIsEditting(false)
+      setIsediting(false)
     }
 
     return (
       <>{
-        isEditting
+        isediting
           ? <WrappedInput {...props} onBlur={stopEdditing} />
           : <p
-            onClick={startEditting}
-            onFocus={startEditting}
+            onClick={startediting}
+            onFocus={startediting}
             role="button"
             tabIndex="0">{props.value}
           </p>
