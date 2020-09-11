@@ -16,7 +16,12 @@ const withPreviewClickToEdit = (WrappedInput) => {
       <>{
         isEditting
           ? <WrappedInput {...props} onBlur={stopEdditing} />
-          : <p onClick={startEditting}>{props.value}</p>
+          : <p
+            onClick={startEditting}
+            onFocus={startEditting}
+            role="button"
+            tabIndex="0">{props.value}
+          </p>
       }</>
     )
   }
