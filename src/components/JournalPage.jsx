@@ -13,7 +13,7 @@ class JournalPage extends Component {
     super(props)
     this.state = {
       text: '',
-      tag: "",
+      tags: "",
     }
   }
 
