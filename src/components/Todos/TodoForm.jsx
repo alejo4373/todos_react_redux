@@ -1,12 +1,21 @@
 import React from 'react';
+import TextAreaAutoGrow from './TextareaAutoGrow'
 
 const TodoForm = (props) => {
   const { handleChange, handleSubmit, inputText, todoValue } = props
+
+  const handleSave = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e)
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <TextAreaAutoGrow
         name='inputText'
         onChange={handleChange}
+        onKeyPress={handleSave}
         value={inputText}
         placeholder={'Type a todo'}
         type="text"
