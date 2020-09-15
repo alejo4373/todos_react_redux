@@ -73,6 +73,7 @@ class TodoPage extends Component {
           <TextareaAutoGrowWithPreview
             value={text}
             onChange={this.handleTodoText}
+            onBlur={this.handleEditSave}
           />
         </form>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
