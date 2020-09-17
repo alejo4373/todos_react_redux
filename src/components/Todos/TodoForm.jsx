@@ -2,7 +2,7 @@ import React from 'react';
 import TextAreaAutoGrow from './TextareaAutoGrow'
 
 const TodoForm = (props) => {
-  const { handleChange, handleSubmit, inputText, todoValue } = props
+  const { handleChange, handleSubmit, inputText, todoValue, tags } = props
 
   const handleSave = (e) => {
     if (e.key === 'Enter') {
@@ -18,6 +18,14 @@ const TodoForm = (props) => {
         onKeyPress={handleSave}
         value={inputText}
         placeholder={'Type a todo'}
+        type="text"
+        required
+      />
+      <input
+        name='tags'
+        onChange={handleChange}
+        value={tags}
+        placeholder={'e.g. misc, work, etc.'}
         type="text"
         required
       />

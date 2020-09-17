@@ -7,7 +7,8 @@ class Todos extends Component {
   state = {
     inputText: '',
     todoValue: 100,
-    todo: null
+    todo: null,
+    tags: '',
   }
 
   componentDidMount() {
@@ -23,16 +24,18 @@ class Todos extends Component {
   /* Event Handlers */
   handleSubmit = (event) => {
     event.preventDefault();
-    const { inputText, todoValue } = this.state;
+    const { inputText, todoValue, tags } = this.state;
 
     const todo = {
       text: inputText.trim(),
       value: todoValue,
-      completed: false
+      completed: false,
+      tags: tags.split(',').map(tag => tag.trim())
     }
 
     this.setState({
       inputText: '',
+      tags: '',
       todoValue: 100
     })
 
@@ -61,6 +64,7 @@ class Todos extends Component {
         <TodoForm
           inputText={this.state.inputText}
           todoValue={this.state.todoValue}
+          tags={this.state.tags}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
