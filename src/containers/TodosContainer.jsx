@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
 import TodoPage from '../components/Todos/TodoPage';
+import TagsList from '../components/Tags/TagsList';
+
 import {
   REQUEST_ADD_TODO,
   REQUEST_FETCH_TODOS,
@@ -12,7 +15,6 @@ import {
   SET_TODOS_FILTER,
   REQUEST_TOGGLE_TODO_COMPLETED
 } from '../store/actionTypes/todos';
-import { Switch, Route } from 'react-router-dom';
 
 class TodosContainer extends Component {
 
@@ -83,10 +85,13 @@ class TodosContainer extends Component {
     )
   }
 
+  renderTagsList = () => <TagsList type="todos" />
+
   render() {
     const { path } = this.props.match
     return (
       <Switch>
+        <Route path={`${path}/tags`} render={this.renderTagsList} />
         <Route path={`${path}/:id`} render={this.renderTodoPage} />
         <Route path={path} render={this.renderTodos} />
       </Switch>
