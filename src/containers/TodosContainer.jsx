@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import '../styles/Todos.css'
 import Todos from '../components/Todos';
 import TodoPage from '../components/Todos/TodoPage';
@@ -96,11 +96,14 @@ class TodosContainer extends Component {
   render() {
     const { path } = this.props.match
     return (
-      <Switch>
-        <Route path={`${path}/tags`} render={this.renderTagsList} />
-        <Route path={`${path}/:id`} render={this.renderTodoPage} />
-        <Route path={path} render={this.renderTodos} />
-      </Switch>
+      <>
+        <Link to="/todos/tags">All Tags</Link>
+        <Switch>
+          <Route path={`${path}/tags`} render={this.renderTagsList} />
+          <Route path={`${path}/:id`} render={this.renderTodoPage} />
+          <Route path={path} render={this.renderTodos} />
+        </Switch>
+      </>
     )
   }
 }
