@@ -13,7 +13,7 @@ import {
   REQUEST_UPDATE_TODO,
   REQUEST_DELETE_TODO,
   SET_TODOS_FILTER,
-  REQUEST_TOGGLE_TODO_COMPLETED
+  REQUEST_TOGGLE_TODO_COMPLETED, REQUEST_FETCH_TODOS_BY_TAGS
 } from '../store/actionTypes/todos';
 
 class TodosContainer extends Component {
@@ -55,7 +55,11 @@ class TodosContainer extends Component {
     }
   }
 
-  renderTodos = () => {
+  getTodosByTags = async (tagsQueryString) => {
+    this.props.fetchTodosByTags(tagsQueryString)
+  }
+
+  renderTodos = (routeProps) => {
     const { todos, filter } = this.props
     let filteredTodos = this.applyTodosFilter(todos, filter)
     return (
@@ -64,9 +68,11 @@ class TodosContainer extends Component {
         deleteTodo={this.deleteTodo}
         toggleCompleted={this.toggleCompleted}
         getAllTodos={this.getAllTodos}
+        getTodosByTags={this.getTodosByTags}
         addTodo={this.props.addTodo}
         setTodosFilter={this.props.setTodosFilter}
         filterValue={filter}
+        {...routeProps}
       />
     )
   }
@@ -105,6 +111,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (todo) => dispatch({ type: REQUEST_ADD_TODO, todo: todo }),
     fetchTodos: () => dispatch({ type: REQUEST_FETCH_TODOS }),
+    fetchTodosByTags: (tagsQueryString) => dispatch({ type: REQUEST_FETCH_TODOS_BY_TAGS, payload: tagsQueryString }),
     fetchTodo: (id) => dispatch({ type: REQUEST_FETCH_TODO, id }),
     updateTodo: (id, todoUpdates) => dispatch({
       type: REQUEST_UPDATE_TODO,

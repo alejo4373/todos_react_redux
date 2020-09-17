@@ -11,7 +11,13 @@ class Todos extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllTodos()
+    const tagsQueryString = this.props.location.search
+    let tags = (new URLSearchParams(tagsQueryString)).getAll('tags[]')
+    if (tags.length) {
+      this.props.getTodosByTags(tagsQueryString)
+    } else {
+      this.props.getAllTodos()
+    }
   }
 
   /* Event Handlers */

@@ -12,6 +12,7 @@ import {
   REQUEST_UPDATE_TODO,
   REQUEST_DELETE_TODO,
   REQUEST_FETCH_TODOS,
+  REQUEST_FETCH_TODOS_BY_TAGS,
   REQUEST_FETCH_TODO,
   REQUEST_TOGGLE_TODO_COMPLETED
 } from '../actionTypes/todos'
@@ -41,6 +42,15 @@ function* fetchTodos(action) {
     yield put({ type: RECEIVE_TODOS, payload: data.payload });
   } catch (err) {
     console.log(err)
+    yield put({ type: RECEIVE_ERROR, error: err });
+  }
+}
+
+function* fetchTodosByTags(action) {
+  try {
+    const { data } = yield call(api.fetchTodosByTags, action.payload)
+    yield put({ type: RECEIVE_TODOS, payload: data.payload });
+  } catch (err) {
     yield put({ type: RECEIVE_ERROR, error: err });
   }
 }
@@ -86,6 +96,7 @@ function* toggleTodoCompleted(action) {
 function* todosSagaWatcher() {
   yield takeEvery(REQUEST_ADD_TODO, addTodo)
   yield takeEvery(REQUEST_FETCH_TODOS, fetchTodos)
+  yield takeEvery(REQUEST_FETCH_TODOS_BY_TAGS, fetchTodosByTags)
   yield takeEvery(REQUEST_FETCH_TODO, fetchTodo)
   yield takeEvery(REQUEST_UPDATE_TODO, updateTodo)
   yield takeEvery(REQUEST_DELETE_TODO, deleteTodo)
