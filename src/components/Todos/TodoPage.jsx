@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import "../../styles/TodoPage.css"
 import TextareaAutoGrow from './TextareaAutoGrow';
 import withPreviewClickToEdit from './withPreviewClickToEdit';
@@ -76,6 +77,14 @@ class TodoPage extends Component {
             onBlur={this.handleEditSave}
           />
         </form>
+        <p> 🏷 {
+          todo.tags.map((tag, i) => (
+            <>
+              <Link to={`/todos?tags[]=${tag}`}>{tag}</Link>
+              {i === todo.tags.length - 1 ? " " : ", "}
+            </>
+          ))
+        }</p>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
       </div>
     )
