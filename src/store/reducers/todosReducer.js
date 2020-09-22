@@ -47,7 +47,11 @@ const todosReducer = (state = initialState, { type, payload }) => {
       // If todo being updated is the active todo (being rendered in TodoPage)
       // set activeTodo to the updated todo
       if (activeTodo && todo.id === activeTodo.id) {
-        newState.activeTodo = todo;
+        // Merge current activeTodo with todo updates e.g. todos was completed but tags haven't changed
+        newState.activeTodo = {
+          ...newState.activeTodo,
+          ...todo
+        };
       }
 
       newState.todos = newState.todos.map(t => {
