@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import "../../styles/TodoPage.css"
+import { Tag } from '../shared/Tag';
 import TextareaAutoGrow from './TextareaAutoGrow';
 import withPreviewClickToEdit from './withPreviewClickToEdit';
 
@@ -55,6 +55,11 @@ class TodoPage extends Component {
     history.goBack()
   }
 
+  handleRemoveTag = (tag) => {
+    const { removeTagFromTodo, todo } = this.props
+    removeTagFromTodo(todo.id, tag)
+  }
+
   render() {
     const { text } = this.state;
     const { todo } = this.props;
@@ -77,14 +82,9 @@ class TodoPage extends Component {
             onBlur={this.handleEditSave}
           />
         </form>
-        <p> 🏷 {
-          todo.tags.map((tag, i) => (
-            <>
-              <Link to={`/todos?tags[]=${tag}`}>{tag}</Link>
-              {i === todo.tags.length - 1 ? " " : ", "}
-            </>
-          ))
-        }</p>
+        <ul> 🏷 {
+          todo.tags.map(tag => <Tag key={tag} name={tag} handleRemoveTag={this.handleRemoveTag} />)
+        }</ul>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
       </div>
     )

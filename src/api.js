@@ -7,6 +7,7 @@ export const fetchTodo = (id) => axios.get(`/api/todos/${id}`)
 export const updateTodo = (id, updates) => axios.patch(`/api/todos/${id}`, updates)
 export const deleteTodo = (id) => axios.delete(`/api/todos/${id}`)
 export const toggleTodoCompleted = (id) => axios.post(`/api/todos/${id}/toggle-completed`)
+export const removeTagFromTodo = (id, tag) => axios.delete(`/api/todos/${id}/tags/${tag}`)
 
 export const addJournalEntry = (entry) => axios.post('/api/journal/entries', entry)
 export const fetchJournalEntries = (params) => axios.get('/api/journal/entries', { params })

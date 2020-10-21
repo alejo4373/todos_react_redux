@@ -13,7 +13,9 @@ import {
   REQUEST_UPDATE_TODO,
   REQUEST_DELETE_TODO,
   SET_TODOS_FILTER,
-  REQUEST_TOGGLE_TODO_COMPLETED, REQUEST_FETCH_TODOS_BY_TAGS
+  REQUEST_TOGGLE_TODO_COMPLETED,
+  REQUEST_FETCH_TODOS_BY_TAGS,
+  REQUEST_REMOVE_TAG
 } from '../store/actionTypes/todos';
 
 class TodosContainer extends Component {
@@ -41,6 +43,10 @@ class TodosContainer extends Component {
 
   updateTodo = (todoId, updates) => {
     this.props.updateTodo(todoId, updates)
+  }
+
+  removeTagFromTodo = (id, tag) => {
+    this.props.removeTagFromTodo(id, tag)
   }
 
   applyTodosFilter = (todos, filter) => {
@@ -87,6 +93,7 @@ class TodosContainer extends Component {
         toggleCompleted={this.toggleCompleted}
         updateTodo={this.updateTodo}
         deleteTodo={this.deleteTodo}
+        removeTagFromTodo={this.removeTagFromTodo}
       />
     )
   }
@@ -129,6 +136,7 @@ const mapDispatchToProps = (dispatch) => {
       payload: { id }
     }),
     setTodosFilter: (filter) => dispatch({ type: SET_TODOS_FILTER, payload: { filter } }),
+    removeTagFromTodo: (id, tag) => dispatch({ type: REQUEST_REMOVE_TAG, payload: { id, tag } }),
   }
 }
 
