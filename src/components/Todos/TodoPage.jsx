@@ -96,8 +96,8 @@ class TodoPage extends Component {
             onBlur={this.handleEditSave}
           />
         </form>
-        <div>
-          <ul> 🏷 {
+        <div className="tags">
+          <ul className="tags__list"> 🏷 {
             todo.tags.map(tag => <Tag key={tag} name={tag} handleRemoveTag={this.handleRemoveTag} />)
           }</ul>
           <input type="text" onChange={this.handleTagInput} />

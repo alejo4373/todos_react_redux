@@ -8,8 +8,8 @@ export const Tag = ({ name, handleRemoveTag }) => {
 
   return (
     <li className="tag">
-      <Link to={`/todos?tags[]=${name}`}>{name}</Link>
-      <button onClick={handleClick}>X</button>
+      <Link className="tag__label" to={`/todos?tags[]=${name}`}>{name}</Link>
+      <button className="tag__remove-btn" onClick={handleClick}>×</button>
     </li>
   )
 }
