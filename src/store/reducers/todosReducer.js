@@ -5,7 +5,8 @@ import {
   SET_TODOS_FILTER,
   SET_ACTIVE_TODO,
   UPDATE_TODO,
-  REMOVE_TAG
+  REMOVE_TAG,
+  ADD_TAG
 } from '../actionTypes/todos';
 
 const initialState = {
@@ -70,6 +71,16 @@ const todosReducer = (state = initialState, { type, payload }) => {
         tags: remainingTags
       };
       return newState;
+
+    case ADD_TAG:
+      // Will only happen when removing a tag in the TodoPage
+      const { addedTag } = payload
+      newState.activeTodo = {
+        ...activeTodo,
+        tags: [...activeTodo.tags, addedTag.name]
+      };
+      return newState;
+
     default:
       return state;
   }

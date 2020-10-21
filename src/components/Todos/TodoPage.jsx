@@ -11,6 +11,7 @@ class TodoPage extends Component {
   state = {
     text: '',
     editing: false,
+    tag: ''
   }
 
   componentDidUpdate(prevProps) {
@@ -48,6 +49,13 @@ class TodoPage extends Component {
     })
   }
 
+  handleTagInput = (e) => {
+    const { value } = e.target
+    this.setState({
+      tag: value
+    })
+  }
+
   handleDeleteTodo = (e) => {
     const todoId = e.target.id;
     const { deleteTodo, history } = this.props
@@ -58,6 +66,12 @@ class TodoPage extends Component {
   handleRemoveTag = (tag) => {
     const { removeTagFromTodo, todo } = this.props
     removeTagFromTodo(todo.id, tag)
+  }
+
+  handleAddTag = () => {
+    const { tag } = this.state
+    const { requestAddTag, todo } = this.props
+    requestAddTag(todo.id, tag)
   }
 
   render() {
@@ -82,9 +96,13 @@ class TodoPage extends Component {
             onBlur={this.handleEditSave}
           />
         </form>
-        <ul> 🏷 {
-          todo.tags.map(tag => <Tag key={tag} name={tag} handleRemoveTag={this.handleRemoveTag} />)
-        }</ul>
+        <div>
+          <ul> 🏷 {
+            todo.tags.map(tag => <Tag key={tag} name={tag} handleRemoveTag={this.handleRemoveTag} />)
+          }</ul>
+          <input type="text" onChange={this.handleTagInput} />
+          <button onClick={this.handleAddTag}>Add Tag</button>
+        </div>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>
       </div>
     )
