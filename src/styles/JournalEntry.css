@@ -1,0 +1,86 @@
+/* 
+
+Trying to follow BEN conventions and tips from here 
+https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-problems-and-how-to-avoid-them/
+
+*/
+
+.entry {
+  list-style: none;
+  position: relative; /* to create stacking context */
+}
+
+.entry__more-btn,
+.menu-btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.entry__more-btn {
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+
+.entry__more-menu {
+  background-color: rgba(255, 255, 255, 0.925);
+  width: 80px;
+  display: none;
+}
+
+.entry__more-menu--open {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 25px;
+}
+
+.menu-btn {
+  width: 100%;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 24px 41px;
+  column-gap: 4px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.menu-btn:hover {
+  background-color: rgba(100, 100, 100, .6);
+}
+.menu-btn__label {
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip__text {
+  visibility: hidden;
+  background-color: rgba(100, 100, 100, .6);
+  border-radius: 4px;
+  padding: 0 4px;
+
+  position: absolute;
+  z-index: 1;
+  bottom: 140%;
+  white-space: nowrap;
+  margin-left: -400%;
+}
+
+.tooltip__text::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 78%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(100, 100, 100, .6) transparent transparent;
+}
+
+.tooltip:hover .tooltip__text {
+  visibility: visible;
+}
