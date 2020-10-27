@@ -7,51 +7,7 @@ https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-pr
 
 .entry {
   list-style: none;
-  position: relative; /* to create stacking context */
-}
-
-.entry__more-btn,
-.menu-btn {
-  border: none;
-  background-color: transparent;
-  padding: 0;
-}
-
-.entry__more-btn {
-  float: right;
-  width: 25px;
-  height: 25px;
-}
-
-.entry__more-menu {
-  background-color: rgba(255, 255, 255, 0.925);
-  width: 80px;
-  display: none;
-}
-
-.entry__more-menu--open {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 25px;
-}
-
-.menu-btn {
-  width: 100%;
-  padding: 5px;
-  display: grid;
-  grid-template-columns: 24px 41px;
-  column-gap: 4px;
-  align-items: center;
-  font-size: 13px;
-}
-
-.menu-btn:hover {
-  background-color: rgba(100, 100, 100, .6);
-}
-.menu-btn__label {
-  text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative; /* to create stacking context for MoreMenu*/
 }
 
 .tooltip {

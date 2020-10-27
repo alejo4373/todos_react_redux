@@ -1,0 +1,44 @@
+.more-btn,
+.more-menu__btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.more-btn {
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+
+.more-menu {
+  background-color: rgba(255, 255, 255, 0.925);
+  width: 80px;
+  display: none;
+}
+
+.more-menu--open {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 25px;
+}
+
+.more-menu__btn {
+  width: 100%;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 24px 41px;
+  column-gap: 4px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.more-menu__btn:hover {
+  background-color: rgba(100, 100, 100, .6);
+}
+
+.more-menu__label {
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
