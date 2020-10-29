@@ -35,20 +35,24 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
 
   return (
     <li className="entry">
-      <MoreMenu handleEditClick={handleEditing} handleDeleteClick={handleDelete} />
-      <p>{editing ? (
-        <>
-          <TextareaAutoGrow
-            name='text'
-            onChange={handleTextChange}
-            value={text}
-            required
-          />
-          <button onClick={handleSaveEdits}>Save</button>
-          <button onClick={handleCancelEdits}>Cancel</button>
-        </>
-      ) : (entry.text)} </p>
-
+      <div>{
+        editing ? (
+          <>
+            <TextareaAutoGrow
+              name='text'
+              onChange={handleTextChange}
+              value={text}
+              required
+            />
+            <button onClick={handleSaveEdits}>Save</button>
+            <button onClick={handleCancelEdits}>Cancel</button>
+          </>
+        ) : (
+            <>
+              <MoreMenu handleEditClick={handleEditing} handleDeleteClick={handleDelete} />
+              <p>{entry.text}</p>
+            </>)
+      }</div>
       <div>
         <span className="entry__date tooltip">
           {time}
