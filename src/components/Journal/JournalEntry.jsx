@@ -24,6 +24,11 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
     updateJournalEntry(entry.id, updates)
   }
 
+  const handleCancelEdits = () => {
+    setEditing(false)
+    setText(entry.text)
+  }
+
   const handleDelete = () => {
     window.alert('JournalEntry will be deleted')
   }
@@ -40,6 +45,7 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
             required
           />
           <button onClick={handleSaveEdits}>Save</button>
+          <button onClick={handleCancelEdits}>Cancel</button>
         </>
       ) : (entry.text)} </p>
 
