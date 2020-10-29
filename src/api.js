@@ -14,6 +14,7 @@ export const requestAddTag = (id, tag) => axios.post(`/api/todos/${id}/tags`, {
 
 export const addJournalEntry = (entry) => axios.post('/api/journal/entries', entry)
 export const fetchJournalEntries = (params) => axios.get('/api/journal/entries', { params })
+export const requestUpdateJournalEntry = (id, updates) => axios.patch(`/api/journal/entries/${id}`, updates)
 
 export const login = (credentials) => axios.post('/api/auth/login', credentials)
 export const signup = (userInfo) => axios.post('/api/auth/signup', userInfo)

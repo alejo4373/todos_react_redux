@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { get24HourTimeString } from '../../util';
 import '../../styles/JournalEntry.css'
 import { MoreMenu } from './MoreMenu';
+import TextareaAutoGrow from '../Todos/TextareaAutoGrow';
 
-const JournalEntry = ({ entry }) => {
+const JournalEntry = ({ entry, updateJournalEntry }) => {
   const date = new Date(entry.ts)
   const time = get24HourTimeString(date)
+  const [text, setText] = useState(entry.text)
+  const [editing, setEditing] = useState(false)
+
+  const handleEditing = () => {
+    setEditing(true)
+  }
+
+  const handleTextChange = (e) => {
+    setText(e.target.value)
+  }
+
+  const handleSaveEdits = (e) => {
+    setEditing(false)
+    const updates = { text }
+    updateJournalEntry(entry.id, updates)
+  }
+
+  const handleDelete = () => {
+    window.alert('JournalEntry will be deleted')
+  }
 
   return (
     <li className="entry">
-      <MoreMenu />
-      <p>{entry.text} </p>
+      <MoreMenu handleEditClick={handleEditing} handleDeleteClick={handleDelete} />
+      <p>{editing ? (
+        <>
+          <TextareaAutoGrow
+            name='text'
+            onChange={handleTextChange}
+            value={text}
+            required
+          />
+          <button onClick={handleSaveEdits}>Save</button>
+        </>
+      ) : (entry.text)} </p>
+
       <div>
         <span className="entry__date tooltip">
           {time}

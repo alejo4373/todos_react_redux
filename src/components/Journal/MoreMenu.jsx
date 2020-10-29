@@ -21,13 +21,11 @@ export const MoreMenu = ({ handleEditClick, handleDeleteClick }) => {
   }
 
   const handleEdit = (e) => {
-    // handleEditClick(e)
-    console.log('edit clicked')
+    handleEditClick(e)
   }
 
   const handleDelete = (e) => {
-    // handleDeleteClick(e)
-    console.log('delete clicked')
+    handleDeleteClick(e)
   }
 
   return (

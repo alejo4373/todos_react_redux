@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { JournalForm, JournalEntriesList } from './Journal'
+import { JournalForm } from './Journal'
 import { Redirect } from 'react-router';
 import TodosList from './Todos/TodosList';
 import "../styles/Journal.css"
-import { REQUEST_ADD_JOURNAL_ENTRY, REQUEST_JOURNAL_ENTRIES } from '../store/actionTypes/journal';
+import {
+  REQUEST_ADD_JOURNAL_ENTRY,
+  REQUEST_JOURNAL_ENTRIES,
+  REQUEST_UPDATE_JOURNAL_ENTRY
+} from '../store/actionTypes/journal';
 import { REQUEST_FETCH_TODOS } from '../store/actionTypes/todos';
 import { getDateString } from '../util';
+import JournalEntry from './Journal/JournalEntry';
 
 class JournalPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: '',
+      text: "",
       tags: "",
     }
   }
@@ -63,6 +68,10 @@ class JournalPage extends Component {
     }
   }
 
+  updateJournalEntry = (id, updates) => {
+    this.props.requestUpdateJournalEntry(id, updates)
+  }
+
   render() {
     const { entries, todos, match: { params } } = this.props;
     const { text, tags } = this.state;
@@ -88,7 +97,17 @@ class JournalPage extends Component {
           entryText={text}
           entryTags={tags}
         />
-        <JournalEntriesList entries={entries} />
+        <div>
+          <ul className="list">{
+            entries.map(entry => (
+              <JournalEntry
+                key={entry.id}
+                entry={entry}
+                updateJournalEntry={this.updateJournalEntry}
+              />
+            ))
+          }</ul>
+        </div>
         <TodosList todos={todos} title="Todos Completed" minimal />
       </div>
     )
@@ -112,6 +131,10 @@ const mapDispatchToProps = (dispatch) => {
     fetchTodos: (params) => dispatch({
       type: REQUEST_FETCH_TODOS,
       payload: params
+    }),
+    requestUpdateJournalEntry: (id, updates) => dispatch({
+      type: REQUEST_UPDATE_JOURNAL_ENTRY,
+      payload: { id, updates }
     })
   }
 }
