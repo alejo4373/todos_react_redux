@@ -52,7 +52,7 @@ class TodoPage extends Component {
   handleTagInput = (e) => {
     const { value } = e.target
     this.setState({
-      tag: value
+      tag: value.toLowerCase()
     })
   }
 
@@ -75,7 +75,7 @@ class TodoPage extends Component {
   }
 
   render() {
-    const { text } = this.state;
+    const { text, tag } = this.state;
     const { todo } = this.props;
 
     if (!todo) {
@@ -100,7 +100,7 @@ class TodoPage extends Component {
           <ul className="tags__list"> 🏷 {
             todo.tags.map(tag => <Tag key={tag} name={tag} handleRemoveTag={this.handleRemoveTag} />)
           }</ul>
-          <input type="text" onChange={this.handleTagInput} />
+          <input type="text" onChange={this.handleTagInput} value={tag} />
           <button onClick={this.handleAddTag}>Add Tag</button>
         </div>
         <button className="btn_remove" id={todo.id} onClick={this.handleDeleteTodo}>Delete</button>

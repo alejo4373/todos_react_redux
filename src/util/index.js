@@ -13,3 +13,12 @@ export const get24HourTimeString = (date) => {
   const MM = padNumber(date.getMinutes())
   return `${HH}:${MM}`
 }
+
+export const sanitizeTags = (tags) => {
+  return (
+    tags
+      .map(tag => tag.trim())
+      .filter(tag => tag)
+      .map(tag => tag.toLocaleLowerCase())
+  )
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { sanitizeTags } from '../util';
 import TodoForm from './Todos/TodoForm';
 import TodosFilter from './Todos/TodosFilter';
 import TodosList from './Todos/TodosList';
@@ -30,7 +31,7 @@ class Todos extends Component {
       text: inputText.trim(),
       value: todoValue,
       completed: false,
-      tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag)
+      tags: sanitizeTags(tags.split(','))
     }
 
     this.setState({

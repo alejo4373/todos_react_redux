@@ -10,7 +10,7 @@ import {
   REQUEST_UPDATE_JOURNAL_ENTRY
 } from '../store/actionTypes/journal';
 import { REQUEST_FETCH_TODOS } from '../store/actionTypes/todos';
-import { getDateString } from '../util';
+import { getDateString, sanitizeTags } from '../util';
 import JournalEntry from './Journal/JournalEntry';
 
 class JournalPage extends Component {
@@ -29,7 +29,7 @@ class JournalPage extends Component {
     if (text && tags.length) {
       const journalEntry = {
         text: text.trim(),
-        tags: tags.split(',').map(t => t.trim()) // Temporary while I implement tag suggestions
+        tags: sanitizeTags(tags.split(','))
       }
 
       this.props.addJournalEntry(journalEntry);
