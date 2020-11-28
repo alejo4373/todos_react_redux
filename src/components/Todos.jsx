@@ -30,7 +30,7 @@ class Todos extends Component {
       text: inputText.trim(),
       value: todoValue,
       completed: false,
-      tags: tags.split(',').map(tag => tag.trim())
+      tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag)
     }
 
     this.setState({

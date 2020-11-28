@@ -27,7 +27,6 @@ const TodoForm = (props) => {
         value={tags}
         placeholder={'e.g. misc, work, etc.'}
         type="text"
-        required
       />
       <input
         name='todoValue'
