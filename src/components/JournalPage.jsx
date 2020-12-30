@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { JournalForm } from './Journal'
-import { Redirect } from 'react-router';
+import { Redirect, Link } from 'react-router-dom';
 import TodosList from './Todos/TodosList';
 import "../styles/Journal.css"
 import {
@@ -10,7 +10,7 @@ import {
   REQUEST_UPDATE_JOURNAL_ENTRY
 } from '../store/actionTypes/journal';
 import { REQUEST_FETCH_TODOS } from '../store/actionTypes/todos';
-import { getDateString, sanitizeTags } from '../util';
+import { getDateString, getMonthDayString, sanitizeTags } from '../util';
 import JournalEntry from './Journal/JournalEntry';
 
 class JournalPage extends Component {
@@ -48,7 +48,7 @@ class JournalPage extends Component {
     })
   }
 
-  componentDidMount = () => {
+  fetchTodosAndJournalEntries = () => {
     let { date } = this.props.match.params
     let client_tz = Intl.DateTimeFormat().resolvedOptions().timeZone
 
@@ -68,6 +68,16 @@ class JournalPage extends Component {
     }
   }
 
+  componentDidMount() {
+    this.fetchTodosAndJournalEntries()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.date !== this.props.match.params.date) {
+      this.fetchTodosAndJournalEntries()
+    }
+  }
+
   updateJournalEntry = (id, updates) => {
     this.props.requestUpdateJournalEntry(id, updates)
   }
@@ -76,20 +86,37 @@ class JournalPage extends Component {
     const { entries, todos, match: { params } } = this.props;
     const { text, tags } = this.state;
 
-    const [year, month, day] = params.date.split('-')
-    let date = new Date(year, parseInt(month) - 1, day)
+    let date;
     let dateStr;
-
     if (params.date === 'today') {
+      date = new Date()
       dateStr = `Today ${(new Date()).toDateString()}`
-    } else if (!isNaN(date.getTime())) {
-      dateStr = date.toDateString();
     } else {
-      return <Redirect to={`/journal/today`} />
+      const [year, month, day] = params.date.split('-')
+      date = new Date(year, parseInt(month) - 1, day)
+      if (!isNaN(date.getTime())) {
+        dateStr = date.toDateString();
+      } else {
+        return <Redirect to={`/journal/today`} />
+      }
     }
 
+    const prevDate = new Date(date)
+    prevDate.setDate(prevDate.getDate() - 1)
+    const prevDateStr = getDateString(prevDate)
+    const prevMMDD = getMonthDayString(prevDate)
+
+    const nextDate = new Date(date)
+    nextDate.setDate(nextDate.getDate() + 1)
+    const nextDateStr = getDateString(nextDate)
+    const nextMMDD = getMonthDayString(nextDate)
+
     return (
-      <div className="journal-page">
+      <div className="journal-page" >
+        <nav>
+          <Link to={`${prevDateStr}`}>{`←${prevMMDD}`}</Link>{" "}
+          <Link to={`${nextDateStr}`}>{`${nextMMDD}→`}</Link>
+        </nav>
         <h2>{dateStr}</h2>
         <JournalForm
           handleChange={this.handleChange}

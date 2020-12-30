@@ -3,3 +3,8 @@
   padding-inline-start: 0;
   padding: 0px;
 }
+
+.journal-page nav {
+  display: flex;
+  justify-content: space-between;
+}

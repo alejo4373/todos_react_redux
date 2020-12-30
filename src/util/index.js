@@ -8,6 +8,13 @@ export const getDateString = (date) => {
   return `${YYYY}-${MM}-${DD}`
 }
 
+export const getMonthDayString = (date) => {
+  const MM = padNumber(date.getMonth() + 1)
+  const DD = padNumber(date.getDate())
+
+  return `${MM}-${DD}`
+}
+
 export const get24HourTimeString = (date) => {
   const HH = padNumber(date.getHours())
   const MM = padNumber(date.getMinutes())
