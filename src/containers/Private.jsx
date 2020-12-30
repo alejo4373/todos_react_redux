@@ -3,6 +3,7 @@ import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import TodosContainer from './TodosContainer';
 import JournalRouter from '../routers/JournalRouter';
 import ProfileContainer from './ProfileContainer';
+import SearchContainer from './SearchContainer';
 import DashboardContainer from './DashboardContainer';
 
 class Private extends Component {
@@ -21,6 +22,7 @@ class Private extends Component {
           <Link to='/dashboard' >Dashboard</Link>{' '}
           <Link to='/todos' >Todos</Link>{' '}
           <Link to='/journal'>Journal</Link>{' '}
+          <Link to='/search'>Search</Link>{' '}
           <Link to='/profile'>Profile</Link>
         </nav>
         <Switch>
@@ -28,6 +30,7 @@ class Private extends Component {
           <Route path='/journal' component={JournalRouter} />
           <Route path='/dashboard' component={DashboardContainer} />
           <Route path='/profile' component={ProfileContainer} />
+          <Route path='/search' component={SearchContainer} />
         </Switch>
       </div>
     )
