@@ -1,3 +1,7 @@
+.more-menu-wrapper {
+  position: relative;
+}
+
 .more-btn,
 .more-menu__btn {
   border: none;

@@ -29,7 +29,7 @@ export const MoreMenu = ({ handleEditClick, handleDeleteClick }) => {
   }
 
   return (
-    <div ref={moreMenuWrapperRef}>
+    <div className="more-menu-wrapper" ref={moreMenuWrapperRef}>
       <button className="more-btn" onClick={toggleMoreMenu}>
         <img src="/icons/more.png" alt="more menu" />
       </button>

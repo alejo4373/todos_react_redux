@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { get24HourTimeString } from '../../util';
 import '../../styles/JournalEntry.css'
-import { MoreMenu } from './MoreMenu';
+import { MoreMenu } from '../shared/MoreMenu';
 import TextareaAutoGrow from '../Todos/TextareaAutoGrow';
 
 const JournalEntry = ({ entry, updateJournalEntry }) => {
