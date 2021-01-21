@@ -1,22 +1,26 @@
 import React, { useState } from 'react'
-import DayPicker from 'react-day-picker'
+import DatePicker from 'react-datepicker'
 import { useHistory } from "react-router-dom";
 import { getDateString } from '../util';
-import 'react-day-picker/lib/style.css';
+import 'react-datepicker/dist/react-datepicker.css'
 
 export const DashboardContainer = () => {
-  const [_ignore, setDay] = useState(null)
+  const [date, setDate] = useState(new Date())
   const history = useHistory()
 
-  const handleDayClick = (day) => {
-    setDay(day)
-    let date = getDateString(day)
+  const handleDateChange = (selectedDate) => {
+    setDate(selectedDate)
+    let date = getDateString(selectedDate)
     history.push(`/journal/${date}`)
   }
 
   return (
     <div>
-      <DayPicker onDayClick={handleDayClick} />
+      <DatePicker
+        selected={date}
+        onChange={handleDateChange}
+        inline
+      />
     </div>
   )
 }
