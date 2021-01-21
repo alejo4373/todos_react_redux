@@ -3,20 +3,23 @@ import "../../styles/TodoPage.css"
 import { Tag } from '../shared/Tag';
 import TextareaAutoGrow from './TextareaAutoGrow';
 import { MoreMenu } from '../shared/MoreMenu'
+import DatePicker from 'react-datepicker'
 
 class TodoPage extends Component {
   todoInputRef = React.createRef()
   state = {
     text: '',
     editing: false,
-    tag: ''
+    tag: '',
+    selectedDay: null
   }
 
   componentDidUpdate(prevProps) {
     const { todo } = this.props
     if (todo && todo !== prevProps.todo) {
       this.setState({
-        text: todo.text
+        text: todo.text,
+        selectedDay: new Date(this.props.todo.completed_at)
       })
     }
   }
@@ -33,12 +36,21 @@ class TodoPage extends Component {
   handleEditSave = (e) => {
     e.preventDefault()
     const { todo, updateTodo } = this.props
-    if (todo.text !== this.state.text) {
-      const todoUpdates = {
-        text: this.state.text
-      }
+    const { selectedDay, text } = this.state
+    const todoUpdates = {}
+
+    if (selectedDay.toISOString() !== new Date(todo.completed_at).toISOString()) {
+      todoUpdates.completed_at = selectedDay.toISOString()
+    }
+
+    if (todo.text !== text) {
+      todoUpdates.text = text
+    }
+
+    if (Object.values(todoUpdates).length) {
       updateTodo(todo.id, todoUpdates)
     }
+
     this.setEditing(false)
   }
 
@@ -78,10 +90,15 @@ class TodoPage extends Component {
     this.setState({ editing: value })
   }
 
-  render() {
-    const { text, tag, editing } = this.state;
-    const { todo } = this.props;
+  handleDateChange = (selectedDay) => {
+    this.setState({
+      selectedDay
+    })
+  }
 
+  render() {
+    const { text, tag, editing, selectedDay } = this.state;
+    const { todo } = this.props;
     if (!todo) {
       return <p>Todo not found....</p>
     }
@@ -102,17 +119,38 @@ class TodoPage extends Component {
           (<>
             <form
               data-todo_id={todo.id}
-              className={'todo-content ' + (todo.completed ? "completed" : "")}
               onSubmit={this.handleEditSave}
             >
               <TextareaAutoGrow
                 value={text}
                 onChange={this.handleTodoText}
               />
-              <button>Save</button>
-              <button onClick={() => this.setEditing(false)}>Cancel</button>
+              <label>Completed at</label>
+              <style>{`
+                .react-datepicker__input-time-container 
+                .react-datepicker-time__input-container 
+                .react-datepicker-time__input 
+                input {
+                    width: unset
+                  }
+              `} </style>
+              <DatePicker
+                onChange={this.handleDateChange}
+                selected={selectedDay}
+                showTimeInput
+                dateFormat="MM/dd/yyyy h:mm aa"
+              />
+              <div>
+                <button> Save</button>
+                <button onClick={() => this.setEditing(false)}>Cancel</button>
+              </div>
             </form>
-          </>) : <p>{text}</p>
+          </>) : (
+            <div>
+              <p className={'todo-content ' + (todo.completed ? "completed" : "")} >{text}</p>
+              <p>{todo.completed_at}</p>
+            </div>
+          )
         }
         <div className="tags">
           <ul className="tags__list"> 🏷 {
