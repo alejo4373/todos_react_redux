@@ -114,7 +114,7 @@ class AuthContainer extends Component {
         </Switch>
         <p>{this.state.message}</p>
         <ReCAPTCHA
-          sitekey="6LdI4d0ZAAAAAOy7aZaRNZy1WJWJpD5tXTH8Y30l"
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
           onChange={this.handleCaptcha}
           onErrored={this.handleCaptchaError}
         />
