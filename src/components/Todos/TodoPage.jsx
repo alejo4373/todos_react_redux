@@ -127,21 +127,26 @@ class TodoPage extends Component {
               />
               <label>Completed at</label>
               <style>{`
+                /*
+                Override due to default (85px) width cutting am/pm text
+                https://github.com/Hacker0x01/react-datepicker/issues/2697
+                */
                 .react-datepicker__input-time-container 
                 .react-datepicker-time__input-container 
                 .react-datepicker-time__input 
                 input {
-                    width: unset
-                  }
-              `} </style>
+                  width: unset
+                }
+              `}</style>
               <DatePicker
                 onChange={this.handleDateChange}
                 selected={selectedDay}
                 showTimeInput
                 dateFormat="MM/dd/yyyy h:mm aa"
+                shouldCloseOnSelect={false}
               />
               <div>
-                <button> Save</button>
+                <button>Save</button>
                 <button onClick={() => this.setEditing(false)}>Cancel</button>
               </div>
             </form>
