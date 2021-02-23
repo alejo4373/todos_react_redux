@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { JournalForm } from './Journal'
+import { JournalEntryEditor } from './Journal'
 import { Redirect, Link } from 'react-router-dom';
 import TodosList from './Todos/TodosList';
 import "../styles/Journal.css"
@@ -47,6 +47,13 @@ class JournalPage extends Component {
       [name]: value
     })
   }
+
+  handleEntryText = (content) => {
+    this.setState({
+      text: content
+    })
+  }
+
 
   fetchTodosAndJournalEntries = () => {
     let { date } = this.props.match.params
@@ -118,8 +125,9 @@ class JournalPage extends Component {
           <Link to={`${nextDateStr}`}>{`${nextMMDD}→`}</Link>
         </nav>
         <h2>{dateStr}</h2>
-        <JournalForm
-          handleChange={this.handleChange}
+        <JournalEntryEditor
+          handleEntryText={this.handleEntryText}
+          handleTagsChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           entryText={text}
           entryTags={tags}
