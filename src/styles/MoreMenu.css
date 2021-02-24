@@ -1,5 +1,10 @@
 .more-menu-wrapper {
-  position: relative;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  height: 25px;
+  width: 25px;
 }
 
 .more-btn,
@@ -7,12 +12,6 @@
   border: none;
   background-color: transparent;
   padding: 0;
-}
-
-.more-btn {
-  float: right;
-  width: 25px;
-  height: 25px;
 }
 
 .more-menu {

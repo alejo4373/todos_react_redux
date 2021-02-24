@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { get24HourTimeString } from '../../util';
 import '../../styles/JournalEntry.css'
 import { MoreMenu } from '../shared/MoreMenu';
-import TextareaAutoGrow from '../Todos/TextareaAutoGrow';
+import ReactQuill from 'react-quill';
 
 const JournalEntry = ({ entry, updateJournalEntry }) => {
   const date = new Date(entry.ts)
@@ -14,8 +14,8 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
     setEditing(true)
   }
 
-  const handleTextChange = (e) => {
-    setText(e.target.value)
+  const handleTextChange = (content) => {
+    setText(content)
   }
 
   const handleSaveEdits = (e) => {
@@ -35,24 +35,23 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
 
   return (
     <li className="entry">
-      <div>{
-        editing ? (
-          <>
-            <TextareaAutoGrow
-              name='text'
-              onChange={handleTextChange}
-              value={text}
-              required
-            />
-            <button onClick={handleSaveEdits}>Save</button>
-            <button onClick={handleCancelEdits}>Cancel</button>
-          </>
-        ) : (
+      <div>
+        <ReactQuill
+          value={text}
+          readOnly={!editing}
+          onChange={handleTextChange}
+          theme={editing ? "snow" : "bubble"}
+        />
+        {
+          editing ? (
             <>
+              <button onClick={handleSaveEdits}>Save</button>
+              <button onClick={handleCancelEdits}>Cancel</button>
+            </>
+          ) : (
               <MoreMenu handleEditClick={handleEditing} handleDeleteClick={handleDelete} />
-              <p>{entry.text}</p>
-            </>)
-      }</div>
+            )
+        }</div>
       <div>
         <span className="entry__date tooltip">
           {time}

@@ -1,3 +1,7 @@
 .ql-container {
   font-size: 16px;
 }
+
+.ql-editor[contenteditable=false] {
+  padding: 0 25px 0 0; /* right 25px needed so that text doesn't get too close to more menu*/
+}
