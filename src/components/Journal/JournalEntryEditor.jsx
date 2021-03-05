@@ -13,6 +13,11 @@ const JournalEntryEditor = (props) => {
         onChange={handleEntryText}
         value={entryText}
         placeholder={'What\'s in your head?'}
+        modules={{
+          keyboard: {
+            bindings: { tab: false }
+          }
+        }}
       />
       <input
         name='tags'
