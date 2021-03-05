@@ -16,7 +16,8 @@ const JournalEntryEditor = (props) => {
         modules={{
           keyboard: {
             bindings: { tab: false }
-          }
+          },
+          toolbar: [{ 'header': [1, 2, 3, false] }, 'bold', 'italic', 'underline']
         }}
       />
       <input
