@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
+import Editor from '../shared/Editor'
 import '../../styles/JournalEntryEditor.css'
 
 const JournalEntryEditor = (props) => {
@@ -8,17 +7,11 @@ const JournalEntryEditor = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ReactQuill
+      <Editor
         name='text'
         onChange={handleEntryText}
         value={entryText}
         placeholder={'What\'s in your head?'}
-        modules={{
-          keyboard: {
-            bindings: { tab: false }
-          },
-          toolbar: [{ 'header': [1, 2, 3, false] }, 'bold', 'italic', 'underline', 'link']
-        }}
       />
       <input
         name='tags'

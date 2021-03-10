@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import "../../styles/TodoPage.css"
 import { Tag } from '../shared/Tag';
-import TextareaAutoGrow from './TextareaAutoGrow';
 import { MoreMenu } from '../shared/MoreMenu'
 import DatePicker from 'react-datepicker'
+import Editor from '../shared/Editor'
 
 class TodoPage extends Component {
-  todoInputRef = React.createRef()
+  editorKey = 0
   state = {
     text: '',
     editing: false,
@@ -54,10 +54,9 @@ class TodoPage extends Component {
     this.setEditing(false)
   }
 
-  handleTodoText = (e) => {
-    const { value } = e.target
+  handleTodoText = (content) => {
     this.setState({
-      text: value
+      text: content
     })
   }
 
@@ -96,9 +95,15 @@ class TodoPage extends Component {
     })
   }
 
+  handleCancelClick = (e) => {
+    e.preventDefault()
+    this.setEditing(false)
+  }
+
   render() {
     const { text, tag, editing, selectedDay } = this.state;
     const { todo } = this.props;
+    console.log('render =>', "'", text, "'", editing)
     if (!todo) {
       return <p>Todo not found....</p>
     }
@@ -115,18 +120,22 @@ class TodoPage extends Component {
           checked={todo.completed}
           onChange={this.handleToggleCompleted}
         />
-        {editing ?
-          (<>
-            <form
-              data-todo_id={todo.id}
-              onSubmit={this.handleEditSave}
-            >
-              <TextareaAutoGrow
-                value={text}
-                onChange={this.handleTodoText}
-              />
-              <label>Completed at</label>
-              <style>{`
+        <form
+          data-todo_id={todo.id}
+          onSubmit={this.handleEditSave}
+        >
+          {editing ?
+            <Editor
+              value={text}
+              onChange={this.handleTodoText}
+            /> :
+            <div
+              className={todo.completed ? "completed" : ""}
+              dangerouslySetInnerHTML={{ __html: text }}
+            ></div>
+          }
+          <label>Completed at</label>
+          <style>{`
                 /*
                 Override due to default (85px) width cutting am/pm text
                 https://github.com/Hacker0x01/react-datepicker/issues/2697
@@ -138,25 +147,20 @@ class TodoPage extends Component {
                   width: unset
                 }
               `}</style>
-              <DatePicker
-                onChange={this.handleDateChange}
-                selected={selectedDay}
-                showTimeInput
-                dateFormat="MM/dd/yyyy h:mm aa"
-                shouldCloseOnSelect={false}
-              />
-              <div>
-                <button>Save</button>
-                <button onClick={() => this.setEditing(false)}>Cancel</button>
-              </div>
-            </form>
-          </>) : (
-            <div>
-              <p className={'todo-content ' + (todo.completed ? "completed" : "")} >{text}</p>
-              <p>{todo.completed_at}</p>
-            </div>
-          )
-        }
+          <DatePicker
+            onChange={this.handleDateChange}
+            selected={selectedDay}
+            showTimeInput
+            dateFormat="MM/dd/yyyy h:mm aa"
+            shouldCloseOnSelect={false}
+            readOnly={!editing}
+          />
+          <div>
+            <button type="submit">Save</button>
+            <button onClick={this.handleCancelClick}>Cancel</button>
+          </div>
+        </form>
+        <button onClick={() => this.setState(p => p.count + 1)}>Add</button>
         <div className="tags">
           <ul className="tags__list"> 🏷 {
             todo.tags.map(tag => <Tag key={tag} name={tag} handleRemoveTag={this.handleRemoveTag} />)
@@ -164,7 +168,7 @@ class TodoPage extends Component {
           <input type="text" onChange={this.handleTagInput} value={tag} />
           <button onClick={this.handleAddTag}>Add Tag</button>
         </div>
-      </div>
+      </div >
     )
   }
 }

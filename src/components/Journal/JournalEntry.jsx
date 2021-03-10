@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { get24HourTimeString } from '../../util';
 import '../../styles/JournalEntry.css'
 import { MoreMenu } from '../shared/MoreMenu';
-import ReactQuill from 'react-quill';
+import Editor from '../shared/Editor';
 
 const JournalEntry = ({ entry, updateJournalEntry }) => {
   const date = new Date(entry.ts)
@@ -36,7 +36,8 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
   return (
     <li className="entry">
       <div>
-        <ReactQuill
+        <Editor
+          key={Number(editing)} // Used to instantiate quill with new config
           value={text}
           readOnly={!editing}
           onChange={handleTextChange}
@@ -49,8 +50,8 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
               <button onClick={handleCancelEdits}>Cancel</button>
             </>
           ) : (
-              <MoreMenu handleEditClick={handleEditing} handleDeleteClick={handleDelete} />
-            )
+            <MoreMenu handleEditClick={handleEditing} handleDeleteClick={handleDelete} />
+          )
         }</div>
       <div>
         <span className="entry__date tooltip">

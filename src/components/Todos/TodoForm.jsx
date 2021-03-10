@@ -1,25 +1,19 @@
 import React from 'react';
-import TextAreaAutoGrow from './TextareaAutoGrow'
+import Editor from '../shared/Editor';
 
 const TodoForm = (props) => {
   const { handleChange, handleSubmit, inputText, todoValue, tags } = props
 
-  const handleSave = (e) => {
-    if (e.key === 'Enter') {
-      handleSubmit(e)
-    }
+  const handleTodoTextChange = (content) => {
+    handleChange({ target: { name: 'inputText', value: content } })
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextAreaAutoGrow
-        name='inputText'
-        onChange={handleChange}
-        onKeyPress={handleSave}
+      <Editor
+        onChange={handleTodoTextChange}
         value={inputText}
-        placeholder={'Type a todo'}
-        type="text"
-        required
+        placeholder={'What do you have to do?'}
       />
       <input
         name='tags'
