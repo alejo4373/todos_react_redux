@@ -124,18 +124,26 @@ class TodoPage extends Component {
           onSubmit={this.handleEditSave}
         >
           {editing ?
-            <Editor
-              value={text}
-              onChange={this.handleTodoText}
-              placeholder="What do you have to do?"
-            /> :
+            <>
+              <Editor
+                value={text}
+                onChange={this.handleTodoText}
+                placeholder="What do you have to do?"
+              />
+              <div>
+                <button type="submit">Save</button>
+                <button onClick={this.handleCancelClick}>Cancel</button>
+              </div>
+            </>
+            :
             <div
               className={todo.completed ? "completed" : ""}
               dangerouslySetInnerHTML={{ __html: text }}
             ></div>
-          }
-          <label>Completed at</label>
-          <style>{`
+          } {todo.completed_at ?
+            <div>
+              <label>Completed at:</label>{" "}
+              <style>{`
                 /*
                 Override due to default (85px) width cutting am/pm text
                 https://github.com/Hacker0x01/react-datepicker/issues/2697
@@ -146,21 +154,21 @@ class TodoPage extends Component {
                 input {
                   width: unset
                 }
+                .react-datepicker__input-container > input {
+                  border: ${!editing ? "0" : null}
+                }
               `}</style>
-          <DatePicker
-            onChange={this.handleDateChange}
-            selected={selectedDay}
-            showTimeInput
-            dateFormat="MM/dd/yyyy h:mm aa"
-            shouldCloseOnSelect={false}
-            readOnly={!editing}
-          />
-          <div>
-            <button type="submit">Save</button>
-            <button onClick={this.handleCancelClick}>Cancel</button>
-          </div>
+              <DatePicker
+                onChange={this.handleDateChange}
+                selected={selectedDay}
+                showTimeInput
+                dateFormat="MM/dd/yyyy h:mm aa"
+                shouldCloseOnSelect={false}
+                readOnly={!editing}
+              />
+            </div> : null
+          }
         </form>
-        <button onClick={() => this.setState(p => p.count + 1)}>Add</button>
         <div className="tags">
           <ul className="tags__list"> 🏷 {
             todo.tags.map(tag => <Tag key={tag} name={tag} handleRemoveTag={this.handleRemoveTag} />)
