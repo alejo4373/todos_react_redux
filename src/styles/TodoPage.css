@@ -1,3 +1,7 @@
+.todo-page {
+  position: relative;
+}
+
 .todo-page .todo-text {
   display: inline-block;
   text-decoration: inherit;
