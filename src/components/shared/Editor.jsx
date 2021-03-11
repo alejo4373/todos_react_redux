@@ -30,9 +30,11 @@ const Editor = ({ value, onChange, theme, readOnly, placeholder }) => {
     // eslint-disable-next-line
   }, [quill])
 
+  // Upon form submission when value is reset to empty string
+  // Quill editor will be emptied too
   useEffect(() => {
     if (quill && value.length < 1) {
-      quill.clipboard.dangerouslyPasteHTML(value)
+      quill.setText('')
     }
   }, [quill, value])
 

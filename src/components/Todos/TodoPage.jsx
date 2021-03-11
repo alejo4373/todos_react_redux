@@ -103,7 +103,6 @@ class TodoPage extends Component {
   render() {
     const { text, tag, editing, selectedDay } = this.state;
     const { todo } = this.props;
-    console.log('render =>', "'", text, "'", editing)
     if (!todo) {
       return <p>Todo not found....</p>
     }
@@ -128,6 +127,7 @@ class TodoPage extends Component {
             <Editor
               value={text}
               onChange={this.handleTodoText}
+              placeholder="What do you have to do?"
             /> :
             <div
               className={todo.completed ? "completed" : ""}
