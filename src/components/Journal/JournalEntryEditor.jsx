@@ -1,6 +1,5 @@
 import React from 'react';
 import TrixEditor from '../shared/TrixEditor'
-import '../../styles/JournalEntryEditor.css'
 
 const JournalEntryEditor = (props) => {
   const { handleEntryText, handleTagsChange, handleSubmit, entryText, entryTags } = props

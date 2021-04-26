@@ -1,0 +1,14 @@
+.control-strip {
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+  margin-top: .5em;
+}
+
+.control-strip__control {
+  font-size: 16px;
+/* Same as trix-editor */
+  padding: 0.4em 0.6em; 
+  border: 1px solid #bbb;
+  border-radius: 3px;
+}
+

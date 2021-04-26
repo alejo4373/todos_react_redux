@@ -1,5 +1,6 @@
 import React from 'react';
 import TrixEditor from '../shared/TrixEditor';
+import "../../styles/TodoForm.css"
 
 const TodoForm = (props) => {
   const { handleChange, handleSubmit, inputText, todoValue, tags } = props
@@ -9,29 +10,33 @@ const TodoForm = (props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="todo-form" onSubmit={handleSubmit}>
       <TrixEditor
         onChange={handleTodoTextChange}
         value={inputText}
         placeholder={'What do you have to do?'}
       />
-      <input
-        name='tags'
-        onChange={handleChange}
-        value={tags}
-        placeholder={'e.g. misc, work, etc.'}
-        type="text"
-      />
-      <input
-        name='todoValue'
-        onChange={handleChange}
-        value={todoValue}
-        placeholder={'value'}
-        type="number"
-        min="100"
-        required
-      />
-      <button>Add</button>
+      <div className="control-strip">
+        <input
+          name='tags'
+          className="control-strip__control"
+          onChange={handleChange}
+          value={tags}
+          placeholder={'e.g. misc, work, etc.'}
+          type="text"
+        />
+        <input
+          name='todoValue'
+          className="control-strip__control"
+          onChange={handleChange}
+          value={todoValue}
+          placeholder={'value'}
+          type="number"
+          min="100"
+          required
+        />
+        <button className="control-strip__control" >Add</button>
+      </div>
     </form>
   )
 }

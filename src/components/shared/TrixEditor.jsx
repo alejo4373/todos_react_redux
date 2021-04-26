@@ -4,6 +4,7 @@ import {
   ReactTrixRTEToolbar as TrixToolbar
 } from 'react-trix-rte'
 import 'trix'
+import "../../styles/TrixEditor.css"
 
 const Editor = ({ value, onChange, placeholder }) => {
   let options = ["heading1", "bold", "italic", "link", "bullet", "number", "undo", "redo"]
