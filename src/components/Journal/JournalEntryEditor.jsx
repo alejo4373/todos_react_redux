@@ -8,7 +8,6 @@ const JournalEntryEditor = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <TrixEditor
-        name='text'
         onChange={handleEntryText}
         value={entryText}
         placeholder={'What\'s in your head?'}

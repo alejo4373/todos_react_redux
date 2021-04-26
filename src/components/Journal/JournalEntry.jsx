@@ -37,11 +37,8 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
     <li className="entry">
       <div>
         <TrixEditor
-          key={Number(editing)} // Used to instantiate quill with new config
           value={text}
-          readOnly={!editing}
           onChange={handleTextChange}
-          theme={editing ? "snow" : "bubble"}
         />
         {
           editing ? (
