@@ -3,7 +3,7 @@ import "../../styles/TodoPage.css"
 import { Tag } from '../shared/Tag';
 import { MoreMenu } from '../shared/MoreMenu'
 import DatePicker from 'react-datepicker'
-import Editor from '../shared/Editor'
+import TrixEditor from '../shared/TrixEditor'
 
 class TodoPage extends Component {
   editorKey = 0
@@ -125,7 +125,7 @@ class TodoPage extends Component {
         >
           {editing ?
             <>
-              <Editor
+              <TrixEditor
                 value={text}
                 onChange={this.handleTodoText}
                 placeholder="What do you have to do?"

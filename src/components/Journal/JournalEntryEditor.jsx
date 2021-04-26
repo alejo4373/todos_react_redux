@@ -1,5 +1,5 @@
 import React from 'react';
-import Editor from '../shared/Editor'
+import TrixEditor from '../shared/TrixEditor'
 import '../../styles/JournalEntryEditor.css'
 
 const JournalEntryEditor = (props) => {
@@ -7,7 +7,7 @@ const JournalEntryEditor = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Editor
+      <TrixEditor
         name='text'
         onChange={handleEntryText}
         value={entryText}

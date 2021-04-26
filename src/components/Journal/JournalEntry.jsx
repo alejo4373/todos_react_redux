@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { get24HourTimeString } from '../../util';
 import '../../styles/JournalEntry.css'
 import { MoreMenu } from '../shared/MoreMenu';
-import Editor from '../shared/Editor';
+import TrixEditor from '../shared/TrixEditor';
 
 const JournalEntry = ({ entry, updateJournalEntry }) => {
   const date = new Date(entry.ts)
@@ -36,7 +36,7 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
   return (
     <li className="entry">
       <div>
-        <Editor
+        <TrixEditor
           key={Number(editing)} // Used to instantiate quill with new config
           value={text}
           readOnly={!editing}

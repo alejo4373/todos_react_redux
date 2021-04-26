@@ -1,5 +1,5 @@
 import React from 'react';
-import Editor from '../shared/Editor';
+import TrixEditor from '../shared/TrixEditor';
 
 const TodoForm = (props) => {
   const { handleChange, handleSubmit, inputText, todoValue, tags } = props
@@ -10,7 +10,7 @@ const TodoForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Editor
+      <TrixEditor
         onChange={handleTodoTextChange}
         value={inputText}
         placeholder={'What do you have to do?'}
