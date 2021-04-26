@@ -5,8 +5,14 @@
 
 .todos-container ul > .todo-item {
   display: grid;
-  grid-template-columns: 7% 83% 10%;
+  grid-template-columns: 7% 93%;
   margin: 1em 0;
+}
+
+.todo-item__text, .todo-item__text * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .completed  {

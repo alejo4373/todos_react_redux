@@ -21,7 +21,7 @@ const TodoItem = (props) => {
         data-todo_id={todo.id}
         className={'todo-content ' + (todo.completed ? "completed" : "")}
       >
-        <div dangerouslySetInnerHTML={{ __html: todo.text }}></div>
+        <div className="todo-item__text" dangerouslySetInnerHTML={{ __html: todo.text }}></div>
       </Link>
     </li>
   )
