@@ -35,21 +35,20 @@ const JournalEntry = ({ entry, updateJournalEntry }) => {
 
   return (
     <li className="entry">
-      <div>
-        <TrixEditor
-          value={text}
-          onChange={handleTextChange}
-        />
-        {
-          editing ? (
-            <>
-              <button onClick={handleSaveEdits}>Save</button>
-              <button onClick={handleCancelEdits}>Cancel</button>
-            </>
-          ) : (
+      {
+        editing ? (
+          <div>
+            <TrixEditor value={text} id={entry.id} onChange={handleTextChange} />
+            <button onClick={handleSaveEdits}>Save</button>
+            <button onClick={handleCancelEdits}>Cancel</button>
+          </div>
+        ) : (
+          <div>
+            <div className="entry__text" dangerouslySetInnerHTML={{ __html: text }}></div>
             <MoreMenu handleEditClick={handleEditing} handleDeleteClick={handleDelete} />
-          )
-        }</div>
+          </div>
+        )
+      }
       <div>
         <span className="entry__date tooltip">
           {time}

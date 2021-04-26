@@ -10,6 +10,10 @@ https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-pr
   position: relative; /* to create stacking context for MoreMenu*/
 }
 
+.entry__text {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 .tooltip {
   position: relative;
 }

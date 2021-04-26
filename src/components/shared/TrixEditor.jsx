@@ -6,7 +6,7 @@ import {
 import 'trix'
 import "../../styles/TrixEditor.css"
 
-const Editor = ({ value, onChange, placeholder }) => {
+const Editor = ({ value, onChange, placeholder, id }) => {
   let options = ["heading1", "bold", "italic", "link", "bullet", "number", "undo", "redo"]
 
   const handleChange = (e, value) => {
@@ -15,7 +15,7 @@ const Editor = ({ value, onChange, placeholder }) => {
   return (
     <div className="editor" >
       <TrixToolbar
-        toolbarId="trix-toolbar"
+        toolbarId={`trix-toolbar${id ? '-' + id : ''}`}
         toolbarActions={options}
         disableGroupingAction={true}
       />
@@ -23,7 +23,7 @@ const Editor = ({ value, onChange, placeholder }) => {
         defaultValue={value}
         placeholder={placeholder}
         onChange={handleChange}
-        toolbarId="trix-toolbar"
+        toolbarId={`trix-toolbar${id ? '-' + id : ''}`}
       />
     </div>
   )

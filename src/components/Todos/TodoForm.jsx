@@ -22,7 +22,7 @@ const TodoForm = (props) => {
           className="control-strip__control"
           onChange={handleChange}
           value={tags}
-          placeholder={'e.g. misc, work, etc.'}
+          placeholder={'Tags: work, misc, etc.'}
           type="text"
         />
         <input
