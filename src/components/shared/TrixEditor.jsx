@@ -34,6 +34,7 @@ const Editor = ({ value, onChange, placeholder, id }) => {
         onChange={handleChange}
         trixInputRef={editorRef}
         toolbarId={`trix-toolbar${id ? '-' + id : ''}`}
+        trixEditorOptions={{ className: "trix-editor-small" }}
       />
     </div>
   )
